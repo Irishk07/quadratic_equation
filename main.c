@@ -3,34 +3,34 @@
 
 int main(void) 
 {
-    float a = 0, b = 0, c = 0;
-    scanf("%f %f %f", &a, &b, &c);
+    double a = 0, b = 0, c = 0;
+    scanf("%lf %lf %lf", &a, &b, &c);
 
-    if (a != 0) {
-        float d = b * b - 4 * a * c; //дискриминант
-        if (d == 0) {
-            float x = -b / (2 * a); //единственный корень
-            printf("x = %f", x);
+    if (abs(a - 0) > 1e-9) {
+        double d = b * b - 4 * a * c; //дискриминант
+        if (abs(d - 0) < 1e-9) {
+            double x = -b / (2 * a); //единственный корень
+            printf("x = %lg", x);
         }
         else if (d > 0) {
-            float x1 = (-b + sqrt(d)) / (2 * a); //первый корень
-            float x2 = (-b - sqrt(d)) / (2 * a); //второй корень
-            printf("x1 = %f, x2 = %f", x1, x2);
+            double x1 = (-b + sqrt(d)) / (2 * a); //первый корень
+            double x2 = (-b - sqrt(d)) / (2 * a); //второй корень
+            printf("x1 = %lg, x2 = %lg", x1, x2);
         }
         else {
             printf("нет решений");
         }
     }
     else {
-        if (b == 0 && c != 0) {
+        if (abs(b - 0) < 1e-9 && abs(c - 0) > 1e-9) {
             printf("нет решений");
         }
-        else if (b == 0 && c == 0) {
+        else if (abs(b - 0) < 1e-9 && abs(c - 0) < 1e-9) {
             printf("бесконечно много решений");
         }
         else {
-            float x = -c / b; //единственный корень
-            printf("x = %f", x);
+            double x = -c / b; //единственный корень
+            printf("x = %lg", x);
         }
     }  
     return 0; 
