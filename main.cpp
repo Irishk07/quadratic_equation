@@ -5,6 +5,13 @@
 const double EPS = 1e-9;
 const int MAX_COUNT_ROOTS = 2;
 
+enum cnt_of_roots {
+    ZERO = 0, 
+    ONE = 1, 
+    TWO = 2, 
+    INF = 3
+};
+
 struct solve_equation {
     int count_roots;
     double roots[MAX_COUNT_ROOTS];
@@ -27,30 +34,27 @@ int main()
 }
 
 void in_put(double *a, double *b, double *c) {
-    assert(a != NULL);
-    assert(b != NULL);
-    assert(c != NULL);
     scanf("%lf %lf %lf", a, b, c); 
 }
 
 void solve_sq(double a, double b, double c, solve_equation *res_of_solving) {
-    assert(res_of_solving != NULL);
+    //assert(res_of_solving != NULL);
     if (!compare(a, 0)) {
         double discr = b * b - 4 * a * c;
         if (compare(discr, 0)) {
             double x = -b / (2 * a);
-            res_of_solving -> count_roots = 1;
+            res_of_solving -> count_roots = ONE;
             res_of_solving -> roots[0] = x;
         }
         else if (discr > 0) {
             double x1 = (-b + sqrt(discr)) / (2 * a);
             double x2 = (-b - sqrt(discr)) / (2 * a);
-            res_of_solving -> count_roots = 2;
+            res_of_solving -> count_roots = TWO;
             res_of_solving -> roots[0] = x1;
             res_of_solving -> roots[1] = x2;
         }
         else {
-            res_of_solving -> count_roots = 0;
+            res_of_solving -> count_roots = ZERO;
         }
     }
     else {
@@ -61,14 +65,14 @@ void solve_sq(double a, double b, double c, solve_equation *res_of_solving) {
 void solve_lin(double b, double c, solve_equation *res_of_solving) {
     assert(res_of_solving != NULL);
     if (compare(b, 0) && !compare(c, 0)) {
-        res_of_solving -> count_roots = 0;
+        res_of_solving -> count_roots = ZERO;
     }
     else if (compare(b, 0) && compare(c, 0)) {
-        res_of_solving -> count_roots = 3;
+        res_of_solving -> count_roots = INF;
     }
     else {
         double x = -c / b;
-        res_of_solving -> count_roots = 1;
+        res_of_solving -> count_roots = ONE;
         res_of_solving -> roots[0] = x;
     }
 }
@@ -78,16 +82,19 @@ int compare(double first_num, double second_num) {
 }
 
 void out_put(solve_equation res_of_solving) {
-    if (res_of_solving.count_roots == 0) {
+    if (res_of_solving.count_roots == ZERO) {
         printf("решений нет");
     }
-    else if (res_of_solving.count_roots == 1) {
+    else if (res_of_solving.count_roots == ONE) {
         printf("x = %lg", res_of_solving.roots[0]);
     }
-    else if (res_of_solving.count_roots == 2) {
+    else if (res_of_solving.count_roots == TWO) {
         printf("x1 = %lg, x2 = %lg", res_of_solving.roots[0], res_of_solving.roots[1]);
     }
-    else {
+    else if (res_of_solving.count_roots == INF){
         printf("бесконечно много решений");
+    }
+    else {
+        assert(0);
     }
 }
