@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <assert.h>
 
 const double EPS = 1e-9;
 const int MAX_COUNT_ROOTS = 2;
@@ -26,10 +27,14 @@ int main()
 }
 
 void in_put(double *a, double *b, double *c) {
+    assert(a != NULL);
+    assert(b != NULL);
+    assert(c != NULL);
     scanf("%lf %lf %lf", a, b, c); 
 }
 
 void solve_sq(double a, double b, double c, solve_equation *res_of_solving) {
+    assert(res_of_solving != NULL);
     if (!compare(a, 0)) {
         double discr = b * b - 4 * a * c;
         if (compare(discr, 0)) {
@@ -54,6 +59,7 @@ void solve_sq(double a, double b, double c, solve_equation *res_of_solving) {
 }
 
 void solve_lin(double b, double c, solve_equation *res_of_solving) {
+    assert(res_of_solving != NULL);
     if (compare(b, 0) && !compare(c, 0)) {
         res_of_solving -> count_roots = 0;
     }
