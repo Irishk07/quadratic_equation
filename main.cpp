@@ -82,19 +82,21 @@ int compare(double first_num, double second_num) {
 }
 
 void out_put(solve_equation res_of_solving) {
-    if (res_of_solving.count_roots == ZERO) {
+    switch (res_of_solving.count_roots) {
+    case ZERO:
         printf("решений нет");
-    }
-    else if (res_of_solving.count_roots == ONE) {
+        break;
+    case ONE:
         printf("x = %lg", res_of_solving.roots[0]);
-    }
-    else if (res_of_solving.count_roots == TWO) {
+        break;
+    case TWO:
         printf("x1 = %lg, x2 = %lg", res_of_solving.roots[0], res_of_solving.roots[1]);
-    }
-    else if (res_of_solving.count_roots == INF){
+        break;
+    case INF:
         printf("бесконечно много решений");
-    }
-    else {
+        break;
+    default:
         assert(0);
+        break;
     }
 }
