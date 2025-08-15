@@ -2,6 +2,7 @@
 #include <math.h>
 
 const double EPS = 1e-9;
+const int MAX_COUNT_ROOTS = 2;
 
 void in_put(double *a, double *b, double *c);
 void solve_sq(double a, double b, double c, struct solve_equation *res_of_solving);
@@ -11,7 +12,7 @@ int compare(double first_num, double second_num);
 
 struct solve_equation {
     int count_roots;
-    double roots[2];
+    double roots[MAX_COUNT_ROOTS];
 };
 
 int main() 
