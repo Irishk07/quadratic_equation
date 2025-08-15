@@ -7,7 +7,7 @@ const int MAX_COUNT_ROOTS = 2;
 void in_put(double *a, double *b, double *c);
 void solve_sq(double a, double b, double c, struct solve_equation *res_of_solving);
 void solve_lin(double b, double c, struct solve_equation *res_of_solving);
-void out_put(struct solve_equation *res_of_solving);
+void out_put(struct solve_equation res_of_solving);
 int compare(double first_num, double second_num);
 
 struct solve_equation {
@@ -21,7 +21,7 @@ int main()
     struct solve_equation res_of_solving = {0, {0, 0}};
     in_put(&a, &b, &c);
     solve_sq(a, b, c, &res_of_solving);
-    out_put(&res_of_solving);
+    out_put(res_of_solving);
     return 0; 
 }
 
@@ -71,15 +71,15 @@ int compare(double first_num, double second_num) {
     return abs(first_num - second_num) < EPS ? 1 : 0;
 }
 
-void out_put(struct solve_equation *res_of_solving) {
-    if (compare(res_of_solving -> count_roots, 0)) {
+void out_put(struct solve_equation res_of_solving) {
+    if (res_of_solving.count_roots == 0) {
         printf("решений нет");
     }
-    else if (compare(res_of_solving -> count_roots, 1)) {
-        printf("x = %lg", res_of_solving -> roots[0]);
+    else if (res_of_solving.count_roots == 1) {
+        printf("x = %lg", res_of_solving.roots[0]);
     }
-    else if (compare(res_of_solving -> count_roots, 2)) {
-        printf("x1 = %lg, x2 = %lg", res_of_solving -> roots[0], res_of_solving -> roots[1]);
+    else if (res_of_solving.count_roots == 2) {
+        printf("x1 = %lg, x2 = %lg", res_of_solving.roots[0], res_of_solving.roots[1]);
     }
     else {
         printf("бесконечно много решений");
