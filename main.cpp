@@ -4,21 +4,21 @@
 const double EPS = 1e-9;
 const int MAX_COUNT_ROOTS = 2;
 
-void in_put(double *a, double *b, double *c);
-void solve_sq(double a, double b, double c, struct solve_equation *res_of_solving);
-void solve_lin(double b, double c, struct solve_equation *res_of_solving);
-void out_put(struct solve_equation res_of_solving);
-int compare(double first_num, double second_num);
-
 struct solve_equation {
     int count_roots;
     double roots[MAX_COUNT_ROOTS];
 };
 
+void in_put(double *a, double *b, double *c);
+void solve_sq(double a, double b, double c, solve_equation *res_of_solving);
+void solve_lin(double b, double c, solve_equation *res_of_solving);
+void out_put(solve_equation res_of_solving);
+int compare(double first_num, double second_num);
+
 int main() 
 {
     double a = 0, b = 0, c = 0;
-    struct solve_equation res_of_solving = {0, {0, 0}};
+    solve_equation res_of_solving = {0, {0, 0}};
     in_put(&a, &b, &c);
     solve_sq(a, b, c, &res_of_solving);
     out_put(res_of_solving);
@@ -29,7 +29,7 @@ void in_put(double *a, double *b, double *c) {
     scanf("%lf %lf %lf", a, b, c); 
 }
 
-void solve_sq(double a, double b, double c, struct solve_equation *res_of_solving) {
+void solve_sq(double a, double b, double c, solve_equation *res_of_solving) {
     if (!compare(a, 0)) {
         double discr = b * b - 4 * a * c;
         if (compare(discr, 0)) {
@@ -53,7 +53,7 @@ void solve_sq(double a, double b, double c, struct solve_equation *res_of_solvin
     }
 }
 
-void solve_lin(double b, double c, struct solve_equation *res_of_solving) {
+void solve_lin(double b, double c, solve_equation *res_of_solving) {
     if (compare(b, 0) && !compare(c, 0)) {
         res_of_solving -> count_roots = 0;
     }
@@ -71,7 +71,7 @@ int compare(double first_num, double second_num) {
     return abs(first_num - second_num) < EPS ? 1 : 0;
 }
 
-void out_put(struct solve_equation res_of_solving) {
+void out_put(solve_equation res_of_solving) {
     if (res_of_solving.count_roots == 0) {
         printf("решений нет");
     }
