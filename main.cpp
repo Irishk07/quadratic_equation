@@ -84,12 +84,12 @@ bool is_double_equal(double first_num, double second_num) {
 
 void solve_sq(double a, double b, double c, solve_equation *res_of_solving) {
     assert(res_of_solving != NULL);
-    if (compare(a, 0)) {
+    if (is_double_equal(a, 0)) {
         solve_lin(b, c, res_of_solving);
         return;
     }
     double discr = b * b - 4 * a * c;
-    if (compare(discr, 0)) {
+    if (is_double_equal(discr, 0)) {
         double x = -b / (2 * a);
         res_of_solving -> count_roots = ONE;
         res_of_solving -> roots[0] = x;
@@ -108,10 +108,10 @@ void solve_sq(double a, double b, double c, solve_equation *res_of_solving) {
 
 void solve_lin(double b, double c, solve_equation *res_of_solving) {
     assert(res_of_solving != NULL);
-    if (compare(b, 0) && !compare(c, 0)) {
+    if (is_double_equal(b, 0) && !is_double_equal(c, 0)) {
         res_of_solving -> count_roots = ZERO;
     }
-    else if (compare(b, 0) && compare(c, 0)) {
+    else if (is_double_equal(b, 0) && is_double_equal(c, 0)) {
         res_of_solving -> count_roots = INF;
     }
     else {
