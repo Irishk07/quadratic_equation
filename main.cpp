@@ -19,10 +19,9 @@ struct solve_equation {
     double roots[MAX_COUNT_ROOTS];
 };
 
-void welcome(void);
+void welcome();
 void in_put_coeff(double *a, double *b, double *c);
 char sign(double coeff);
-void in_put_answer(char *ans);
 int check(double a, double b, double c);
 int compare(double first_num, double second_num); 
 void solve_sq(double a, double b, double c, solve_equation *res_of_solving);
@@ -50,6 +49,7 @@ void welcome() {
 }
 
 void in_put_coeff(double *a, double *b, double *c) {
+    assert(a != NULL && b != NULL && c != NULL);
     printf("Введи, пожалуйста, коэффициенты уравнения, которое ты хочешь решить\n");
     if (scanf("%lf %lf %lf", a, b, c) != 3) {
         printf("ERROR404: Попробуйте снова позже :(\n");
@@ -61,20 +61,14 @@ char sign(double coeff) {
     return (coeff >= 0) ? '+' : '-';
 }
 
-void in_put_answer(char *ans) {
-    scanf("%s", ans); 
-}
-
 int check(double a, double b, double c) {
     printf("Твоё уравнение выглядит так:\n");
-    char signb = sign(b);
-    char signc = sign(c);
-    printf("%lgx^2 %c %lgx %c %lg = 0\n", a, signb, abs(b), signc, abs(c));
+    printf("%lgx^2 %c %lgx %c %lg = 0\n", a, sign(b), abs(b), sign(c), abs(c));
     printf("Всё верно?\n");
     while (true) {
         printf("Введи «Да» или «Нет»\n");
-        char ans[MAX_SIZE];
-        in_put_answer(ans);
+        char ans[MAX_SIZE] = {};
+        scanf("%s", ans);
         if (!strcmp(ans, "Да")) {
             return 1;
         }
@@ -89,26 +83,26 @@ int compare(double first_num, double second_num) {
 }
 
 void solve_sq(double a, double b, double c, solve_equation *res_of_solving) {
-    if (!compare(a, 0)) {
-        double discr = b * b - 4 * a * c;
-        if (compare(discr, 0)) {
-            double x = -b / (2 * a);
-            res_of_solving -> count_roots = ONE;
-            res_of_solving -> roots[0] = x;
-        }
-        else if (discr > 0) {
-            double x1 = (-b + sqrt(discr)) / (2 * a);
-            double x2 = (-b - sqrt(discr)) / (2 * a);
-            res_of_solving -> count_roots = TWO;
-            res_of_solving -> roots[0] = x1;
-            res_of_solving -> roots[1] = x2;
-        }
-        else {
-            res_of_solving -> count_roots = ZERO;
-        }
+    assert(res_of_solving != NULL);
+    if (compare(a, 0)) {
+        solve_lin(b, c, res_of_solving);
+        return;
+    }
+    double discr = b * b - 4 * a * c;
+    if (compare(discr, 0)) {
+        double x = -b / (2 * a);
+        res_of_solving -> count_roots = ONE;
+        res_of_solving -> roots[0] = x;
+    }
+    else if (discr > 0) {
+        double x1 = (-b + sqrt(discr)) / (2 * a);
+        double x2 = (-b - sqrt(discr)) / (2 * a);
+        res_of_solving -> count_roots = TWO;
+        res_of_solving -> roots[0] = x1;
+        res_of_solving -> roots[1] = x2;
     }
     else {
-        solve_lin(b, c, res_of_solving);
+        res_of_solving -> count_roots = ZERO;
     }
 }
 
@@ -130,16 +124,19 @@ void solve_lin(double b, double c, solve_equation *res_of_solving) {
 void out_put(solve_equation res_of_solving) {
     switch (res_of_solving.count_roots) {
     case ZERO:
+        printf("У твоего уравнения нет решений :(\n");
         printf("решений нет");
         break;
     case ONE:
+        printf("Я всё решил!\nКорень твоего уравнения:\n");
         printf("x = %lg", res_of_solving.roots[0]);
         break;
     case TWO:
+        printf("Я всё решил!\nКорни твоего уравнения:\n");
         printf("x1 = %lg, x2 = %lg", res_of_solving.roots[0], res_of_solving.roots[1]);
         break;
     case INF:
-        printf("бесконечно много решений");
+        printf("Я всё решил!\nУ твоего уравнения бесконечно много решений :)\n");
         break;
     default:
         assert(0);
