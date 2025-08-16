@@ -62,10 +62,14 @@ void welcome() {
 void in_put_coeff(double *a, double *b, double *c) {
     assert(a != NULL && b != NULL && c != NULL);
     printf("Введи, пожалуйста, коэффициенты уравнения, которое ты хочешь решить\n");
-    if (scanf("%lf %lf %lf", a, b, c) != 3) {
-        printf("ERROR404: Попробуйте снова позже :(\n");
-        exit(0);
+    double coeff[] = {0, 0, 0};
+    for (int i = 0; i < 3; ++i) {
+        if (scanf("%lf", &coeff[i]) != 1 || (getchar() != '\n')) {
+            printf("ERROR404: Попробуйте снова позже :(\n");
+            exit(0);
+        }
     }
+    *a = coeff[0], *b = coeff[1], *c = coeff[2];
 }
 
 char sign(double coeff) {
