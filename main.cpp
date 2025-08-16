@@ -80,6 +80,7 @@ void remove_trash() {
 }
 
 int check(double *coeff) {
+    assert(coeff != NULL);
     printf("Твоё уравнение выглядит так:\n");
     printf("%lgx^2 %c %lgx %c %lg = 0\n", coeff[0], sign(coeff[1]), abs(coeff[1]), sign(coeff[2]), abs(coeff[2]));
     printf("Всё верно?\n");
@@ -110,7 +111,7 @@ bool is_double_equal(double first_num, double second_num) {
 }
 
 void solve_sq(double *coeff, solve_equation *res_of_solving) {
-    assert(res_of_solving != NULL);
+    assert(coeff != NULL && res_of_solving != NULL);
     if (is_double_equal(coeff[0], 0)) {
         solve_lin(coeff, res_of_solving);
         return;
@@ -134,7 +135,7 @@ void solve_sq(double *coeff, solve_equation *res_of_solving) {
 }
 
 void solve_lin(double *coeff, solve_equation *res_of_solving) {
-    assert(res_of_solving != NULL);
+    assert(coeff != NULL && res_of_solving != NULL);
     if (is_double_equal(coeff[1], 0) && !is_double_equal(coeff[2], 0)) {
         res_of_solving -> count_roots = ZERO;
     }
