@@ -25,7 +25,8 @@ void in_put_coeff(double *a, double *b, double *c);
 char sign(double coeff);
 void remove_trash();
 int check(double a, double b, double c);
-bool is_double_equal(double first_num, double second_num); 
+void draw_cat_2();
+bool is_double_equal(double first_num, double second_num);
 void solve_sq(double a, double b, double c, solve_equation *res_of_solving);
 void solve_lin(double b, double c, solve_equation *res_of_solving);
 void out_put(solve_equation res_of_solving);
@@ -40,6 +41,7 @@ int main()
         in_put_coeff(&a, &b, &c);
     }
     printf("Отлично! Приступим к решению :)\n");
+    draw_cat_2();
     solve_sq(a, b, c, &res_of_solving);
     out_put(res_of_solving);
     return 0; 
@@ -92,6 +94,13 @@ int check(double a, double b, double c) {
             return 0;
         }
     }
+}
+
+void draw_cat_2() {
+    printf("     _._     _,-'\"\"`-._\n");
+    printf("(,-.`._,'(       |\\`-/|\n");
+    printf("    `-.-' \\ )-`( , o o)\n");
+    printf("          `-    \\`_`\"'-\n");
 }
 
 bool is_double_equal(double first_num, double second_num) {
