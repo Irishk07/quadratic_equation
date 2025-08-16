@@ -152,15 +152,14 @@ void out_put(solve_equation res_of_solving) {
     switch (res_of_solving.count_roots) {
     case ZERO:
         printf("У твоего уравнения нет решений :(\n");
-        printf("решений нет");
         break;
     case ONE:
         printf("Я всё решил!\nКорень твоего уравнения:\n");
-        printf("x = %lg", res_of_solving.roots[0]);
+        printf("x = %lg\n", res_of_solving.roots[0]);
         break;
     case TWO:
         printf("Я всё решил!\nКорни твоего уравнения:\n");
-        printf("x1 = %lg, x2 = %lg", res_of_solving.roots[0], res_of_solving.roots[1]);
+        printf("x1 = %lg, x2 = %lg\n", res_of_solving.roots[0], res_of_solving.roots[1]);
         break;
     case INF:
         printf("Я всё решил!\nУ твоего уравнения бесконечно много решений :)\n");
@@ -169,4 +168,5 @@ void out_put(solve_equation res_of_solving) {
         assert(0);
         break;
     }
+    printf("Жду тебя с новыми уравнениями! Мяу <3\n");
 }
