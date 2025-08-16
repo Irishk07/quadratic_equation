@@ -97,7 +97,7 @@ int check(double a, double b, double c) {
 }
 
 void draw_cat_2() {
-    printf("     _._     _,-'\"\"`-._\n");
+    printf(" _._     _,-'\"\"`-._\n");
     printf("(,-.`._,'(       |\\`-/|\n");
     printf("    `-.-' \\ )-`( , o o)\n");
     printf("          `-    \\`_`\"'-\n");
