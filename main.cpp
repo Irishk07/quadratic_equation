@@ -23,7 +23,7 @@ void welcome();
 void in_put_coeff(double *a, double *b, double *c);
 char sign(double coeff);
 int check(double a, double b, double c);
-int compare(double first_num, double second_num); 
+bool is_double_equal(double first_num, double second_num); 
 void solve_sq(double a, double b, double c, solve_equation *res_of_solving);
 void solve_lin(double b, double c, solve_equation *res_of_solving);
 void out_put(solve_equation res_of_solving);
@@ -78,7 +78,7 @@ int check(double a, double b, double c) {
     }
 }
 
-int compare(double first_num, double second_num) {
+bool is_double_equal(double first_num, double second_num) {
     return abs(first_num - second_num) < EPS ? 1 : 0;
 }
 
