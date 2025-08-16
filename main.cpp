@@ -21,28 +21,28 @@ struct solve_equation {
 
 void draw_cat_1();
 void welcome();
-void in_put_coeff(double *a, double *b, double *c);
-char sign(double coeff);
+void in_put_coeff(double *coeff);
+char sign(double coefficiant);
 void remove_trash();
-int check(double a, double b, double c);
+int check(double *coeff);
 void draw_cat_2();
 bool is_double_equal(double first_num, double second_num);
-void solve_sq(double a, double b, double c, solve_equation *res_of_solving);
-void solve_lin(double b, double c, solve_equation *res_of_solving);
+void solve_sq(double *coeff, solve_equation *res_of_solving);
+void solve_lin(double *coeff, solve_equation *res_of_solving);
 void out_put(solve_equation res_of_solving);
 
 int main() 
 {
-    double a = 0, b = 0, c = 0;
+    double coeff [] = {0, 0, 0};
     solve_equation res_of_solving = {0, {0, 0}};
     welcome();
-    in_put_coeff(&a, &b, &c);
-    while (!check(a, b, c)) {
-        in_put_coeff(&a, &b, &c);
+    in_put_coeff(coeff);
+    while (!check(coeff)) {
+        in_put_coeff(coeff);
     }
     printf("Отлично! Приступим к решению :)\n");
     draw_cat_2();
-    solve_sq(a, b, c, &res_of_solving);
+    solve_sq(coeff, &res_of_solving);
     out_put(res_of_solving);
     return 0; 
 }
@@ -59,21 +59,19 @@ void welcome() {
     draw_cat_1();
 }
 
-void in_put_coeff(double *a, double *b, double *c) {
-    assert(a != NULL && b != NULL && c != NULL);
+void in_put_coeff(double *coeff) {
+    assert(coeff != NULL);
     printf("Введи, пожалуйста, коэффициенты уравнения, которое ты хочешь решить\n");
-    double coeff[] = {0, 0, 0};
     for (int i = 0; i < 3; ++i) {
         if (scanf("%lf", &coeff[i]) != 1 || (getchar() != '\n')) {
             printf("ERROR404: Попробуйте снова позже :(\n");
             exit(0);
         }
     }
-    *a = coeff[0], *b = coeff[1], *c = coeff[2];
 }
 
-char sign(double coeff) {
-    return (coeff >= 0) ? '+' : '-';
+char sign(double coefficiant) {
+    return (coefficiant >= 0) ? '+' : '-';
 }
 
 void remove_trash() {
@@ -81,9 +79,9 @@ void remove_trash() {
     }
 }
 
-int check(double a, double b, double c) {
+int check(double *coeff) {
     printf("Твоё уравнение выглядит так:\n");
-    printf("%lgx^2 %c %lgx %c %lg = 0\n", a, sign(b), abs(b), sign(c), abs(c));
+    printf("%lgx^2 %c %lgx %c %lg = 0\n", coeff[0], sign(coeff[1]), abs(coeff[1]), sign(coeff[2]), abs(coeff[2]));
     printf("Всё верно?\n");
     while (true) {
         printf("Введи «Да» или «Нет»\n");
@@ -111,21 +109,21 @@ bool is_double_equal(double first_num, double second_num) {
     return abs(first_num - second_num) < EPS ? 1 : 0;
 }
 
-void solve_sq(double a, double b, double c, solve_equation *res_of_solving) {
+void solve_sq(double *coeff, solve_equation *res_of_solving) {
     assert(res_of_solving != NULL);
-    if (is_double_equal(a, 0)) {
-        solve_lin(b, c, res_of_solving);
+    if (is_double_equal(coeff[0], 0)) {
+        solve_lin(coeff, res_of_solving);
         return;
     }
-    double discr = b * b - 4 * a * c;
+    double discr = coeff[1] * coeff[1] - 4 * coeff[0] * coeff[2];
     if (is_double_equal(discr, 0)) {
-        double x = -b / (2 * a);
+        double x = -coeff[1] / (2 * coeff[0]);
         res_of_solving -> count_roots = ONE;
         res_of_solving -> roots[0] = x;
     }
     else if (discr > 0) {
-        double x1 = (-b + sqrt(discr)) / (2 * a);
-        double x2 = (-b - sqrt(discr)) / (2 * a);
+        double x1 = (-coeff[1] + sqrt(discr)) / (2 * coeff[0]);
+        double x2 = (-coeff[1] - sqrt(discr)) / (2 * coeff[0]);
         res_of_solving -> count_roots = TWO;
         res_of_solving -> roots[0] = x1;
         res_of_solving -> roots[1] = x2;
@@ -135,16 +133,16 @@ void solve_sq(double a, double b, double c, solve_equation *res_of_solving) {
     }
 }
 
-void solve_lin(double b, double c, solve_equation *res_of_solving) {
+void solve_lin(double *coeff, solve_equation *res_of_solving) {
     assert(res_of_solving != NULL);
-    if (is_double_equal(b, 0) && !is_double_equal(c, 0)) {
+    if (is_double_equal(coeff[1], 0) && !is_double_equal(coeff[2], 0)) {
         res_of_solving -> count_roots = ZERO;
     }
-    else if (is_double_equal(b, 0) && is_double_equal(c, 0)) {
+    else if (is_double_equal(coeff[1], 0) && is_double_equal(coeff[2], 0)) {
         res_of_solving -> count_roots = INF;
     }
     else {
-        double x = -c / b;
+        double x = -coeff[2] / coeff[1];
         res_of_solving -> count_roots = ONE;
         res_of_solving -> roots[0] = x;
     }
