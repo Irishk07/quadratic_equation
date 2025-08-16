@@ -5,7 +5,7 @@
 
 const double EPS = 1e-9;
 const int MAX_COUNT_ROOTS = 2;
-const int MAX_SIZE = 3;
+const int MAX_LEN = 4 * 2; //For russian symbols in UTF-8
 
 enum cnt_of_roots {
     ZERO = 0, 
@@ -19,9 +19,11 @@ struct solve_equation {
     double roots[MAX_COUNT_ROOTS];
 };
 
+void draw_cat_1();
 void welcome();
 void in_put_coeff(double *a, double *b, double *c);
 char sign(double coeff);
+void remove_trash();
 int check(double a, double b, double c);
 bool is_double_equal(double first_num, double second_num); 
 void solve_sq(double a, double b, double c, solve_equation *res_of_solving);
@@ -43,9 +45,16 @@ int main()
     return 0; 
 }
 
+void draw_cat_1() {
+    printf("    |\\__/,|   (`\\\n");
+    printf("  _.|o o  |_   ) )\n");
+    printf("-(((---(((--------\n");
+}
+
 void welcome() {
     printf("Привет!\n");
     printf("Я твой помощник в решении квадратных уравнений\n");
+    draw_cat_1();
 }
 
 void in_put_coeff(double *a, double *b, double *c) {
@@ -61,14 +70,21 @@ char sign(double coeff) {
     return (coeff >= 0) ? '+' : '-';
 }
 
+void remove_trash() {
+    while (getchar() != '\n') {
+    }
+}
+
 int check(double a, double b, double c) {
     printf("Твоё уравнение выглядит так:\n");
     printf("%lgx^2 %c %lgx %c %lg = 0\n", a, sign(b), abs(b), sign(c), abs(c));
     printf("Всё верно?\n");
     while (true) {
         printf("Введи «Да» или «Нет»\n");
-        char ans[MAX_SIZE] = {};
-        scanf("%s", ans);
+        char ans[MAX_LEN + 1] = {};
+        static_assert(MAX_LEN == 4 * 2);
+        scanf("%8s", ans);
+        remove_trash();
         if (!strcmp(ans, "Да")) {
             return 1;
         }
