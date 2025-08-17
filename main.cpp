@@ -2,10 +2,13 @@
 #include <math.h>
 #include <string.h>
 #include <assert.h>
+#include "cat.h"
 
 const double EPS = 1e-9;
 const int MAX_COUNT_ROOTS = 2;
 const int MAX_LEN = 4 * 2; //For russian symbols in UTF-8
+const int FIRST = 1;
+const int SECOND = 1;
 
 enum cnt_of_roots {
     ZERO = 0, 
@@ -19,13 +22,12 @@ struct solve_equation {
     double roots[MAX_COUNT_ROOTS];
 };
 
-void draw_cat_1();
+void draw_cat(const char *cat_num);
 void welcome();
 void in_put_coeff(double *coeff);
 char sign(double coefficiant);
 void remove_trash();
 int check(double *coeff);
-void draw_cat_2();
 bool is_double_equal(double first_num, double second_num);
 void solve_sq(double *coeff, solve_equation *res_of_solving);
 void solve_lin(double *coeff, solve_equation *res_of_solving);
@@ -41,22 +43,20 @@ int main()
         in_put_coeff(coeff);
     }
     printf("Отлично! Приступим к решению :)\n");
-    draw_cat_2();
+    draw_cat(cat_2);
     solve_sq(coeff, &res_of_solving);
     out_put(res_of_solving);
     return 0; 
 }
 
-void draw_cat_1() {
-    printf("    |\\__/,|   (`\\\n");
-    printf("  _.|o o  |_   ) )\n");
-    printf("-(((---(((--------\n");
+void draw_cat(const char *cat_num) {
+    printf("%s", cat_num);
 }
 
 void welcome() {
     printf("Привет!\n");
     printf("Я твой помощник в решении квадратных уравнений\n");
-    draw_cat_1();
+    draw_cat(cat_1);
 }
 
 void in_put_coeff(double *coeff) {
@@ -98,13 +98,6 @@ int check(double *coeff) {
             return 0;
         }
     }
-}
-
-void draw_cat_2() {
-    printf(" _._     _,-'\"\"`-._\n");
-    printf("(,-.`._,'(       |\\`-/|\n");
-    printf("    `-.-' \\ )-`( , o o)\n");
-    printf("          `-    \\`_`\"'-\n");
 }
 
 bool is_double_equal(double first_num, double second_num) {
