@@ -43,7 +43,7 @@ int main()
         in_put_coeff(coeff);
     }
     printf("Отлично! Приступим к решению :)\n");
-    draw_cat(cat_2);
+    draw_cat(jumping_cat);
     solve_sq(coeff, &res_of_solving);
     out_put(res_of_solving);
     return 0; 
@@ -56,7 +56,7 @@ void draw_cat(const char *cat_num) {
 void welcome() {
     printf("Привет!\n");
     printf("Я твой помощник в решении квадратных уравнений\n");
-    draw_cat(cat_1);
+    draw_cat(sitting_cat);
 }
 
 void in_put_coeff(double *coeff) {
