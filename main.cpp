@@ -22,7 +22,6 @@ struct solve_equation {
     double roots[MAX_COUNT_ROOTS];
 };
 
-void draw_cat(const char *cat_num);
 void welcome();
 void in_put_coeff(double *coeff);
 char sign(double coefficiant);
@@ -43,20 +42,16 @@ int main()
         in_put_coeff(coeff);
     }
     printf("Отлично! Приступим к решению :)\n");
-    draw_cat(jumping_cat);
+    printf(jumping_cat);
     solve_sq(coeff, &res_of_solving);
     out_put(res_of_solving);
     return 0; 
 }
 
-void draw_cat(const char *cat_num) {
-    printf("%s", cat_num);
-}
-
 void welcome() {
     printf("Привет!\n");
     printf("Я твой помощник в решении квадратных уравнений\n");
-    draw_cat(sitting_cat);
+    printf(sitting_cat);
 }
 
 void in_put_coeff(double *coeff) {
