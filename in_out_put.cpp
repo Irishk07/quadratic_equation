@@ -5,10 +5,20 @@
 #include "common.h"
 
 void in_put_one_coeff(double *coeff, int num_coeff) {
-    printf("Введи коэффициент %c:\n", 'a' + num_coeff);
-    if (scanf("%lf", coeff) != 1 || (getchar() != '\n')) {
-        remove_trash();
-        in_put_one_coeff(coeff, num_coeff);
+    int try_left = CNT_TRY;
+    while (try_left > 0) {
+        printf("Введи коэффициент %c:\n", 'a' + num_coeff);
+        if (scanf("%lf", coeff) != 1 || (getchar() != '\n')) {
+            remove_trash();
+            --try_left;
+            if (try_left == 0) {
+                printf("Ты попытался ввести коэффициент %d раз!\n", CNT_TRY);
+                printf("Что с тобой не так....? :/");
+                exit(0);
+            }
+            continue;
+        }
+        break;
     }
 }
 
