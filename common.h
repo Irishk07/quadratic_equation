@@ -2,6 +2,7 @@
 #define COMMON_H_
 
 const int MAX_COUNT_ROOTS = 2;
+const int COUNT_COEFF = 3;
 
 enum cnt_of_roots {
     ZERO = 0, 

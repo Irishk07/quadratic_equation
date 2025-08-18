@@ -11,19 +11,22 @@ bool is_double_equal(double first_num, double second_num) {
 
 void solve_sq(double *coeff, solve_equation *res_of_solving) {
     assert(coeff != NULL && res_of_solving != NULL);
-    if (is_double_equal(coeff[0], 0)) {
-        solve_lin(coeff, res_of_solving);
+    double a = coeff[0];
+    double b = coeff[1];
+    double c = coeff[2];
+    if (is_double_equal(a, 0)) {
+        solve_lin(coeff + 1, res_of_solving);
         return;
     }
-    double discr = coeff[1] * coeff[1] - 4 * coeff[0] * coeff[2];
+    double discr = b * b - 4 * a * c;
     if (is_double_equal(discr, 0)) {
-        double x = -coeff[1] / (2 * coeff[0]);
+        double x = -b / (2 * a);
         res_of_solving -> count_roots = ONE;
         res_of_solving -> roots[0] = x;
     }
     else if (discr > 0) {
-        double x1 = (-coeff[1] + sqrt(discr)) / (2 * coeff[0]);
-        double x2 = (-coeff[1] - sqrt(discr)) / (2 * coeff[0]);
+        double x1 = (-b + sqrt(discr)) / (2 * a);
+        double x2 = (-b - sqrt(discr)) / (2 * a);
         res_of_solving -> count_roots = TWO;
         res_of_solving -> roots[0] = x1;
         res_of_solving -> roots[1] = x2;
@@ -35,14 +38,16 @@ void solve_sq(double *coeff, solve_equation *res_of_solving) {
 
 void solve_lin(double *coeff, solve_equation *res_of_solving) {
     assert(coeff != NULL && res_of_solving != NULL);
-    if (is_double_equal(coeff[1], 0) && !is_double_equal(coeff[2], 0)) {
+    double b = coeff[0];
+    double c = coeff[1];
+    if (is_double_equal(b, 0) && !is_double_equal(c, 0)) {
         res_of_solving -> count_roots = ZERO;
     }
-    else if (is_double_equal(coeff[1], 0) && is_double_equal(coeff[2], 0)) {
+    else if (is_double_equal(b, 0) && is_double_equal(c, 0)) {
         res_of_solving -> count_roots = INF;
     }
     else {
-        double x = -coeff[2] / coeff[1];
+        double x = -c / b;
         res_of_solving -> count_roots = ONE;
         res_of_solving -> roots[0] = x;
     }

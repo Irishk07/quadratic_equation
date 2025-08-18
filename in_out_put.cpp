@@ -4,15 +4,20 @@
 #include "in_out_put.h"
 #include "common.h"
 
-void in_put_coeff(double *coeff) {
-    assert(coeff != NULL);
+void in_put_one_coeff(double *coeff, int num_coeff) {
+    printf("Введи коэффициент %c:\n", 'a' + num_coeff);
+    if (scanf("%lf", coeff) != 1 || (getchar() != '\n')) {
+        remove_trash();
+        in_put_one_coeff(coeff, num_coeff);
+    }
+}
+
+void in_put_all_coeffs(double *all_coeffs) {
+    assert(all_coeffs != NULL);
     printf("Введи, пожалуйста, коэффициенты уравнения, которое ты хочешь решить\n");
     printf("Каждый коэффициент вводи с новой строки\n");
-    for (int i = 0; i < 3; ++i) {
-        if (scanf("%lf", &coeff[i]) != 1 || (getchar() != '\n')) {
-            printf("ERROR404: Попробуйте снова позже :(\n");
-            exit(0);
-        }
+    for (int i = 0; i < COUNT_COEFF; ++i) {
+        in_put_one_coeff(&all_coeffs[i], i);
     }
 }
 

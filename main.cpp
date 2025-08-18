@@ -11,16 +11,16 @@ const int SECOND = 1;
 void welcome();
 
 int main() {
-    double coeff [] = {0, 0, 0};
+    double all_coeffs [] = {0, 0, 0};
     solve_equation res_of_solving = {0, {0, 0}};
     welcome();
-    in_put_coeff(coeff);
-    while (!check(coeff)) {
-        in_put_coeff(coeff);
+    in_put_all_coeffs(all_coeffs);
+    while (!check(all_coeffs)) {
+        in_put_all_coeffs(all_coeffs);
     }
     printf("Отлично! Приступим к решению :)\n");
     printf("%s", jumping_cat);
-    solve_sq(coeff, &res_of_solving);
+    solve_sq(all_coeffs, &res_of_solving);
     out_put(res_of_solving);
     return 0; 
 }
