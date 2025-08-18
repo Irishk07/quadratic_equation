@@ -42,7 +42,7 @@ int main()
         in_put_coeff(coeff);
     }
     printf("Отлично! Приступим к решению :)\n");
-    printf(jumping_cat);
+    printf("%s", jumping_cat);
     solve_sq(coeff, &res_of_solving);
     out_put(res_of_solving);
     return 0; 
@@ -51,7 +51,7 @@ int main()
 void welcome() {
     printf("Привет!\n");
     printf("Я твой помощник в решении квадратных уравнений\n");
-    printf(sitting_cat);
+    printf("%s", sitting_cat);
 }
 
 void in_put_coeff(double *coeff) {
