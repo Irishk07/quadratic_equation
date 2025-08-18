@@ -4,7 +4,7 @@
 #include "in_out_put.h"
 #include "common.h"
 
-void in_put_one_coeff(double *coeff, int num_coeff) {
+status in_put_one_coeff(double *coeff, int num_coeff) {
     int try_left = CNT_TRY;
     while (try_left > 0) {
         printf("Введи коэффициент %c:\n", 'a' + num_coeff);
@@ -14,21 +14,26 @@ void in_put_one_coeff(double *coeff, int num_coeff) {
             if (try_left == 0) {
                 printf("Ты попытался ввести коэффициент %d раз!\n", CNT_TRY);
                 printf("Что с тобой не так....? :/");
-                exit(0);
+                return IN_PUT_ERROR;
             }
             continue;
         }
         break;
     }
+    return SUCCESS;
 }
 
-void in_put_all_coeffs(double *all_coeffs) {
+status in_put_all_coeffs(double *all_coeffs) {
     assert(all_coeffs != NULL);
     printf("Введи, пожалуйста, коэффициенты уравнения, которое ты хочешь решить\n");
     printf("Каждый коэффициент вводи с новой строки\n");
     for (int i = 0; i < COUNT_COEFF; ++i) {
-        in_put_one_coeff(&all_coeffs[i], i);
+        status res = in_put_one_coeff(&all_coeffs[i], i);
+        if (res != SUCCESS) {
+            return res;
+        }
     }
+    return SUCCESS;
 }
 
 char sign(double coefficiant) {

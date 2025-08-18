@@ -11,6 +11,11 @@ enum cnt_of_roots {
     INF = 3
 };
 
+enum status {
+    SUCCESS = 0,
+    IN_PUT_ERROR = 1
+};
+
 struct solve_equation {
     int count_roots;
     double roots[MAX_COUNT_ROOTS];

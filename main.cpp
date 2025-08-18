@@ -13,15 +13,23 @@ void welcome();
 int main() {
     double all_coeffs [] = {0, 0, 0};
     solve_equation res_of_solving = {0, {0, 0}};
+
     welcome();
-    in_put_all_coeffs(all_coeffs);
-    while (!check(all_coeffs)) {
-        in_put_all_coeffs(all_coeffs);
-    }
+
+    do {
+        if (in_put_all_coeffs(all_coeffs) != SUCCESS) {
+            return -1;
+        }
+    } 
+    while (!check(all_coeffs));
+
     printf("Отлично! Приступим к решению :)\n");
     printf("%s", jumping_cat);
+
     solve_sq(all_coeffs, &res_of_solving);
+
     out_put(res_of_solving);
+
     return 0; 
 }
 
