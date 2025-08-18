@@ -1,3 +1,6 @@
+#ifndef CAT_H
+#define CAT_H
+
 const char sitting_cat [] = "    |\\__/,|   (`\\\n"
                             "  _.|o o  |_   ) )\n"
                             "-(((---(((--------\n";
@@ -6,3 +9,5 @@ const char jumping_cat [] = " _._     _,-'\"\"`-._\n"
                             "(,-.`._,'(       |\\`-/|\n"
                             "    `-.-' \\ )-`( , o o)\n"
                             "          `-    \\`_`\"'-\n";
+
+#endif
