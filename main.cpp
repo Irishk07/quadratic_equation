@@ -5,9 +5,6 @@
 #include "solver.h"
 #include "in_out_put.h"
 
-const int FIRST = 1;
-const int SECOND = 1;
-
 void welcome();
 
 int main() {
