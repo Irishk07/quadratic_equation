@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-const int MAX_LEN = 4 * 2; //For russian symbols in UTF-8
+const int MAX_LEN = 3;
 const int CNT_TRY = 5;
 
 status in_put_one_coeff(double *coeff, int num_coeff);

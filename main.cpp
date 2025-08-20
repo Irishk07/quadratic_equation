@@ -1,12 +1,13 @@
 #include <locale.h>
 #include <stdio.h>
 #include <assert.h>
+#include <errno.h>
 #include "common.h"
-#include "cat.h"
 #include "solver.h"
 #include "in_out_put.h"
 
 void welcome();
+void print_cats(const char *filename);
 
 int main() {
     setlocale (LC_ALL, "");
@@ -36,4 +37,18 @@ int main() {
 void welcome() {
     printf("Привет!\n");
     printf("Я твой помощник в решении квадратных уравнений\n");
+    print_cats("sitting_cat.txt");
+}
+
+void print_cats(const char *filename) {
+    FILE *cat;
+    cat = fopen(filename, "r");
+    if (cat == NULL) {
+        perror("Ошибка открытия файла\n");
+    }
+    int ch = '0';
+    while ((ch = getc(cat)) != EOF) {
+        printf("%c", ch);
+    }
+    printf("\n");
 }

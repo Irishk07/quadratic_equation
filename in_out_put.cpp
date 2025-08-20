@@ -51,15 +51,15 @@ int check(double *coeff) {
     printf("%lgx^2 %c %lgx %c %lg = 0\n", coeff[0], sign(coeff[1]), abs(coeff[1]), sign(coeff[2]), abs(coeff[2]));
     printf("Всё верно?\n");
     while (true) {
-        printf("Введи «Да» или «Нет»\n");
+        printf("Введи «Yes» или «No»\n");
         char ans[MAX_LEN + 1] = {};
-        static_assert(MAX_LEN == 4 * 2);
+        static_assert(MAX_LEN == 3);
         scanf("%8s", ans);
         remove_trash();
-        if (!strcmp(ans, "Да")) {
+        if (!strcmp(ans, "Yes")) {
             return 1;
         }
-        else if (!strcmp(ans, "Нет")) {
+        else if (!strcmp(ans, "No")) {
             return 0;
         }
     }
