@@ -7,13 +7,13 @@
 status in_put_one_coeff(double *coeff, int num_coeff) {
     int try_left = CNT_TRY;
     while (try_left > 0) {
-        printf("Введи коэффициент %c:\n", 'a' + num_coeff);
+        printf("Enter the coefficient %c:\n", 'a' + num_coeff);
         if (scanf("%lf", coeff) != 1 || (getchar() != '\n')) {
             remove_trash();
             --try_left;
             if (try_left == 0) {
-                printf("Ты попытался ввести коэффициент %d раз!\n", CNT_TRY);
-                printf("Что с тобой не так....? :/");
+                printf("You tried to enter the coefficient %d times!\n", CNT_TRY);
+                printf("What's wrong with you....? :/");
                 return IN_PUT_ERROR;
             }
             continue;
@@ -25,8 +25,8 @@ status in_put_one_coeff(double *coeff, int num_coeff) {
 
 status in_put_all_coeffs(double *all_coeffs) {
     assert(all_coeffs != NULL);
-    printf("Введи, пожалуйста, коэффициенты уравнения, которое ты хочешь решить\n");
-    printf("Каждый коэффициент вводи с новой строки\n");
+    printf("Please enter the coefficients of the equation you want to solve\n");
+    printf("Enter each coefficient from a new line\n");
     for (int i = 0; i < COUNT_COEFF; ++i) {
         status res = in_put_one_coeff(&all_coeffs[i], i);
         if (res != SUCCESS) {
@@ -47,11 +47,11 @@ void remove_trash() {
 
 int check(double *coeff) {
     assert(coeff != NULL);
-    printf("Твоё уравнение выглядит так:\n");
+    printf("Your equation looks like this:\n");
     printf("%lgx^2 %c %lgx %c %lg = 0\n", coeff[0], sign(coeff[1]), abs(coeff[1]), sign(coeff[2]), abs(coeff[2]));
-    printf("Всё верно?\n");
+    printf("Is everything right?\n");
     while (true) {
-        printf("Введи «Yes» или «No»\n");
+        printf("Enter «Yes» or «No»\n");
         char ans[MAX_LEN + 1] = {};
         static_assert(MAX_LEN == 3);
         scanf("%8s", ans);
@@ -68,22 +68,22 @@ int check(double *coeff) {
 void out_put(solve_equation res_of_solving) {
     switch (res_of_solving.count_roots) {
     case ZERO:
-        printf("У твоего уравнения нет решений :(\n");
+        printf("Your equation has no solutions :(\n");
         break;
     case ONE:
-        printf("Я всё решил!\nКорень твоего уравнения:\n");
+        printf("I've got it!\nThe root of your equation is:\n");
         printf("x = %lg\n", res_of_solving.roots[0]);
         break;
     case TWO:
-        printf("Я всё решил!\nКорни твоего уравнения:\n");
+        printf("I've got it!\nThe roots of your equation are:\n");
         printf("x1 = %lg, x2 = %lg\n", res_of_solving.roots[0], res_of_solving.roots[1]);
         break;
     case INF:
-        printf("Я всё решил!\nУ твоего уравнения бесконечно много решений :)\n");
+        printf("I've got it!\nYour equation has infinitely many solutions :)\n");
         break;
     default:
         assert(0);
         break;
     }
-    printf("Жду тебя с новыми уравнениями! Мяу <3\n");
+    printf("I'm waiting for you with new equations! Meow <3\n");
 }

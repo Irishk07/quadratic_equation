@@ -6,7 +6,7 @@
 void print_cats(const char *filename) {
     FILE *cat = fopen(filename, "r");
     if (cat == NULL) {
-        perror("Ошибка открытия файла\n");
+        perror("File opening error\n");
     }
     int ch = '0';
     while ((ch = getc(cat)) != EOF) {

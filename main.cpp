@@ -24,7 +24,7 @@ int main() {
     } 
     while (!check(all_coeffs));
 
-    printf("Отлично! Приступим к решению :)\n");
+    printf("Great! Let's get to the solution :)\n");
     print_cats(jumping_cat);
 
     solve_sq(all_coeffs, &res_of_solving);
@@ -35,7 +35,7 @@ int main() {
 }
 
 void welcome() {
-    printf("Привет!\n");
-    printf("Я твой помощник в решении квадратных уравнений\n");
+    printf("Hello!\n");
+    printf("I am your assistant in solving quadratic equations\n");
     print_cats(sitting_cat);
 }
