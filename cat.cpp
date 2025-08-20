@@ -4,8 +4,7 @@
 #ifdef PRINT_CAT_FROM_FILE
 
 void print_cats(const char *filename) {
-    FILE *cat;
-    cat = fopen(filename, "r");
+    FILE *cat = fopen(filename, "r");
     if (cat == NULL) {
         perror("Ошибка открытия файла\n");
     }
@@ -14,6 +13,7 @@ void print_cats(const char *filename) {
         printf("%c", ch);
     }
     printf("\n");
+    fclose(cat);
 }
 
 #else
