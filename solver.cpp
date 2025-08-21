@@ -3,10 +3,15 @@
 #include "solver.h"
 #include "common.h"
 
-const double EPS = 1e-9;
-
 bool is_double_equal(double first_num, double second_num) {
     return abs(first_num - second_num) < EPS ? 1 : 0;
+}
+
+double is_it_minus_zero(double root) {
+    if (is_double_equal(abs(root), 0)) {
+        return 0;
+    }
+    return root;
 }
 
 void solve_sq(double *coeff, solve_equation *res_of_solving) {
@@ -21,9 +26,7 @@ void solve_sq(double *coeff, solve_equation *res_of_solving) {
     double discr = b * b - 4 * a * c;
     if (is_double_equal(discr, 0)) {
         double x = -b / (2 * a);
-        if (is_double_equal(abs(x), 0)) {
-            x = 0;
-        }
+        x = is_it_minus_zero(x);
         res_of_solving -> count_roots = ONE;
         res_of_solving -> roots[0] = x;
     }
@@ -51,9 +54,7 @@ void solve_lin(double *coeff, solve_equation *res_of_solving) {
     }
     else {
         double x = -c / b;
-        if (is_double_equal(abs(x), 0)) {
-            x = 0;
-        }
+        x = is_it_minus_zero(x);
         res_of_solving -> count_roots = ONE;
         res_of_solving -> roots[0] = x;
     }
