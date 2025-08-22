@@ -3,11 +3,34 @@
 #include "solver.h"
 #include "common.h"
 
+//......................................................................
+//! Compares two double numbers
+//!
+//! @param[in] first_num - first double number
+//! @param[in] second_num - second double number
+//!
+//! @return 1 if first number is equal to the second and 0 otherwise
+//......................................................................
 static bool is_double_equal(double first_num, double second_num);
 
+//......................................................................
+//! Turns minus zero into zero
+//!
+//! @param[in] root - root of equation
+//!
+//! @return root
+//......................................................................
 static double fix_minus_zero(double root);
 
-static void solve_lin(double *coeff, solve_equation *res_of_solving);
+//......................................................................
+//! Solves linear equation bx + c = 0
+//!
+//! @param[in] all_coeffs - pointer on array with 
+//!                                    coefficients of equation
+//! @param[out] res_of_solving - structure consisting of
+//!                            a number of roots and array with roots
+//......................................................................
+static void solve_lin(double *all_coeffs, solve_equation *res_of_solving);
 
 
 static bool is_double_equal(double first_num, double second_num) {
@@ -21,15 +44,15 @@ static double fix_minus_zero(double root) {
     return root;
 }
 
-void solve_sq(double *coeff, solve_equation *res_of_solving) {
-    assert(coeff != NULL && res_of_solving != NULL);
+void solve_sq(double *all_coeffs, solve_equation *res_of_solving) {
+    assert(all_coeffs != NULL && res_of_solving != NULL);
 
-    double a = coeff[0];
-    double b = coeff[1];
-    double c = coeff[2];
+    double a = all_coeffs[0];
+    double b = all_coeffs[1];
+    double c = all_coeffs[2];
 
     if (is_double_equal(a, 0)) {
-        solve_lin(coeff + 1, res_of_solving);
+        solve_lin(all_coeffs + 1, res_of_solving);
         return;
     }
 
@@ -53,12 +76,12 @@ void solve_sq(double *coeff, solve_equation *res_of_solving) {
     }
 }
 
-static void solve_lin(double *coeff, solve_equation *res_of_solving) {
-    assert(coeff != NULL);
+static void solve_lin(double *all_coeffs, solve_equation *res_of_solving) {
+    assert(all_coeffs != NULL);
     assert(res_of_solving != NULL);
 
-    double b = coeff[0];
-    double c = coeff[1];
+    double b = all_coeffs[0];
+    double c = all_coeffs[1];
 
     if (is_double_equal(b, 0) && !is_double_equal(c, 0)) {
         res_of_solving -> count_roots = ZERO;

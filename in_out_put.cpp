@@ -4,10 +4,29 @@
 #include "in_out_put.h"
 #include "common.h"
 
-static status in_put_one_coeff(double *coeff, int num_coeff);
+//......................................................................
+//! Input one coefficient of equation
+//!
+//! @param[in] all_coeffs - pointer on array with
+//!                                    coefficients of equation
+//! @param[in] num_coef - number of the next coefficient
+//!
+//! @return status of input coefficient
+//......................................................................
+static status in_put_one_coeff(double *all_coeffs, int num_coeff);
 
-static char sign(double coefficiant);
+//......................................................................
+//! Detects the sign of a number
+//!
+//! @param[in] coefficient
+//!
+//! @return sign of a number: '+' or '-'
+//......................................................................
+static char sign(double coefficient);
 
+//......................................................................
+//! Clears the input buffer
+//......................................................................
 static void remove_trash();
 
 
@@ -16,14 +35,14 @@ static void remove_trash() {
     }
 }
 
-static status in_put_one_coeff(double *coeff, int num_coeff) {
-    assert(coeff != NULL);
+static status in_put_one_coeff(double *all_coeffs, int num_coeff) {
+    assert(all_coeffs != NULL);
 
     int try_left = CNT_TRY;
     while (try_left > 0) {
         printf("Enter the coefficient %c:\n", 'a' + num_coeff);
 
-        if (scanf("%lf", coeff) == 1 && (getchar() == '\n')) {
+        if (scanf("%lf", all_coeffs) == 1 && (getchar() == '\n')) {
             break;
         }
         
@@ -51,15 +70,15 @@ status in_put_all_coeffs(double *all_coeffs) {
     return SUCCESS;
 }
 
-static char sign(double coefficiant) {
-    return (coefficiant >= 0) ? '+' : '-';
+static char sign(double coefficient) {
+    return (coefficient >= 0) ? '+' : '-';
 }
 
-int check(double *coeff) {
-    assert(coeff != NULL);
+int check(double *all_coeffs) {
+    assert(all_coeffs != NULL);
 
     printf("Your equation looks like this:\n");
-    printf("%lgx^2 %c %lgx %c %lg = 0\n", coeff[0], sign(coeff[1]), abs(coeff[1]), sign(coeff[2]), abs(coeff[2]));
+    printf("%lgx^2 %c %lgx %c %lg = 0\n", all_coeffs[0], sign(all_coeffs[1]), abs(all_coeffs[1]), sign(all_coeffs[2]), abs(all_coeffs[2]));
     printf("Is everything right?\n");
 
     while (true) {

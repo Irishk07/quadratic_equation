@@ -5,6 +5,9 @@
 #include "in_out_put.h"
 #include "cat.h"
 
+//......................................................................
+//! Greets the user and draws a sitting cat
+//......................................................................
 static void welcome();
 
 int main() {
