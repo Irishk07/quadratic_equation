@@ -19,6 +19,10 @@ prog.exe: $(CPPOBJ)
 
 -include $(HEADER_DEPENDS)
  
+.PHONY: doxygen
+doxygen:
+	doxygen docs/Doxyfile
+
 .PHONY: clean
 clean:
 	del build\*.o /a /s
