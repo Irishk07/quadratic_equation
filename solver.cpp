@@ -26,7 +26,7 @@ void solve_sq(double *coeff, solve_equation *res_of_solving) {
     double discr = b * b - 4 * a * c;
     if (is_double_equal(discr, 0)) {
         double x = -b / (2 * a);
-        x = is_it_minus_zero(x);
+        x = fix_minus_zero(x);
         res_of_solving -> count_roots = ONE;
         res_of_solving -> roots[0] = x;
     }
@@ -54,7 +54,7 @@ void solve_lin(double *coeff, solve_equation *res_of_solving) {
     }
     else {
         double x = -c / b;
-        x = is_it_minus_zero(x);
+        x = fix_minus_zero(x);
         res_of_solving -> count_roots = ONE;
         res_of_solving -> roots[0] = x;
     }
