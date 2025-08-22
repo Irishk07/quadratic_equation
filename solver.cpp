@@ -7,7 +7,7 @@ bool is_double_equal(double first_num, double second_num) {
     return abs(first_num - second_num) < EPS ? 1 : 0;
 }
 
-double is_it_minus_zero(double root) {
+double fix_minus_zero(double root) {
     if (is_double_equal(abs(root), 0)) {
         return 0;
     }
