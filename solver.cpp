@@ -3,11 +3,18 @@
 #include "solver.h"
 #include "common.h"
 
-bool is_double_equal(double first_num, double second_num) {
+static bool is_double_equal(double first_num, double second_num);
+
+static double fix_minus_zero(double root);
+
+static void solve_lin(double *coeff, solve_equation *res_of_solving);
+
+
+static bool is_double_equal(double first_num, double second_num) {
     return abs(first_num - second_num) < EPS ? 1 : 0;
 }
 
-double fix_minus_zero(double root) {
+static double fix_minus_zero(double root) {
     if (is_double_equal(abs(root), 0)) {
         return 0;
     }
@@ -16,14 +23,18 @@ double fix_minus_zero(double root) {
 
 void solve_sq(double *coeff, solve_equation *res_of_solving) {
     assert(coeff != NULL && res_of_solving != NULL);
+
     double a = coeff[0];
     double b = coeff[1];
     double c = coeff[2];
+
     if (is_double_equal(a, 0)) {
         solve_lin(coeff + 1, res_of_solving);
         return;
     }
+
     double discr = b * b - 4 * a * c;
+
     if (is_double_equal(discr, 0)) {
         double x = -b / (2 * a);
         x = fix_minus_zero(x);
@@ -42,10 +53,13 @@ void solve_sq(double *coeff, solve_equation *res_of_solving) {
     }
 }
 
-void solve_lin(double *coeff, solve_equation *res_of_solving) {
-    assert(coeff != NULL && res_of_solving != NULL);
+static void solve_lin(double *coeff, solve_equation *res_of_solving) {
+    assert(coeff != NULL);
+    assert(res_of_solving != NULL);
+
     double b = coeff[0];
     double c = coeff[1];
+
     if (is_double_equal(b, 0) && !is_double_equal(c, 0)) {
         res_of_solving -> count_roots = ZERO;
     }
