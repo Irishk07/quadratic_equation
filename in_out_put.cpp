@@ -11,6 +11,11 @@ static char sign(double coefficiant);
 static void remove_trash();
 
 
+static void remove_trash() {
+    while (getchar() != '\n') {
+    }
+}
+
 static status in_put_one_coeff(double *coeff, int num_coeff) {
     assert(coeff != NULL);
 
@@ -25,8 +30,6 @@ static status in_put_one_coeff(double *coeff, int num_coeff) {
         remove_trash();
 
         if (--try_left == 0) {
-            printf("You tried to enter the coefficient %d times!\n", CNT_TRY);
-            printf("What's wrong with you....? :/");
             return IN_PUT_ERROR;
         }
     }
@@ -50,11 +53,6 @@ status in_put_all_coeffs(double *all_coeffs) {
 
 static char sign(double coefficiant) {
     return (coefficiant >= 0) ? '+' : '-';
-}
-
-static void remove_trash() {
-    while (getchar() != '\n') {
-    }
 }
 
 int check(double *coeff) {

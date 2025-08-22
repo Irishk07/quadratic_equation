@@ -7,19 +7,21 @@
 
 static void welcome();
 
-
 int main() {
     double all_coeffs [] = {0, 0, 0};
     solve_equation res_of_solving = {0, {0, 0}};
 
     welcome();
 
+    int try_left = CNT_TRY;
     do {
-        if (in_put_all_coeffs(all_coeffs) != SUCCESS) {
+        if (in_put_all_coeffs(all_coeffs) != SUCCESS || --try_left == 0) {
+            printf("You tried to do it %d times!\n", CNT_TRY);
+            printf("What's wrong with you....? :/");
             return -1;
         }
     }
-    while (!check(all_coeffs)); // TODO ограничить количество попыток
+    while (!check(all_coeffs));
 
     printf("Great! Let's get to the solution :)\n");
     print_cats(jumping_cat);

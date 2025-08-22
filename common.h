@@ -13,7 +13,9 @@ enum cnt_of_roots {
 
 enum status {
     SUCCESS = 0,
-    IN_PUT_ERROR = 1
+    IN_PUT_ERROR = 1,
+    CHECK_ERROR = 2,
+    KEEP_CHECK = 3
 };
 
 struct solve_equation {
