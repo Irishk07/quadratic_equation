@@ -4,6 +4,10 @@
 const int MAX_COUNT_ROOTS = 2;
 const int COUNT_COEFF = 3;
 
+//......................................................................
+//! @enum cnt_of_roots
+//! @brief detected number of roots
+//......................................................................
 enum cnt_of_roots {
     ZERO = 0, 
     ONE = 1, 
@@ -11,6 +15,10 @@ enum cnt_of_roots {
     INF = 3
 };
 
+//......................................................................
+//! @enum status
+//! @brief function operation status
+//......................................................................
 enum status {
     SUCCESS = 0,
     IN_PUT_ERROR = 1,
@@ -18,9 +26,13 @@ enum status {
     KEEP_CHECK = 3
 };
 
+//......................................................................
+//! @struct solve_equation
+//! @brief consiste of a number of roots and array with roots
+//......................................................................
 struct solve_equation {
-    int count_roots;
-    double roots[MAX_COUNT_ROOTS];
+    int count_roots;                ///< number of roots
+    double roots[MAX_COUNT_ROOTS];  ///< array of roots
 };
 
 #endif
