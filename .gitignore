@@ -3,3 +3,4 @@
 *.save
 .vscode
 g+++.bat
+*.d
