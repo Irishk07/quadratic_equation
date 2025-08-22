@@ -11,7 +11,7 @@ static void solve_lin(double *coeff, solve_equation *res_of_solving);
 
 
 static bool is_double_equal(double first_num, double second_num) {
-    return abs(first_num - second_num) < EPS ? 1 : 0;
+    return fabs(first_num - second_num) < EPS ? 1 : 0;
 }
 
 static double fix_minus_zero(double root) {
