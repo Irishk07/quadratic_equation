@@ -12,12 +12,17 @@
 static void welcome();
 
 int main() {
+
+#ifndef NDEBUG
+
     int sum_error = 0;
     if ((sum_error = run_all_test()) != 0) {
         printf("%d tests are failed\n", sum_error / TEST_FAILED);
         return -1;
     }
     printf("ALL TESTS RIGHT\n");
+
+#endif
 
     double all_coeffs [] = {0.f, 0.f, 0.f};
     solve_equation res_of_solving = {0, {0.f, 0.f}};
