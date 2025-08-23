@@ -11,7 +11,7 @@ void print_cats(const char *filename) {
         perror("File opening error\n");
     }
 
-    int ch = '0';
+    int ch = 0;
     while ((ch = getc(cat)) != EOF) {
         printf("%c", ch);
     }
