@@ -89,10 +89,10 @@ int check(double *all_coeffs) {
         static_assert(MAX_LEN == 3);
         scanf("%" "s", ans);
         
-        if (!strcmp(ans, "Yes") && (getchar() == '\n')) {
+        if (!strcmp(ans, "Yes") && (getchar() == '\n' || getchar() == EOF)) { // stricmp (nocase)
             return 1;
         }
-        else if (!strcmp(ans, "No") && (getchar() == '\n')) {
+        else if (!strcmp(ans, "No") && (getchar() == '\n' || getchar() == EOF)) {
             return 0;
         }
         else {
