@@ -31,7 +31,8 @@ static void remove_trash();
 
 
 static void remove_trash() {
-    while (getchar() != '\n') {
+    int ch = '\0';
+    while ((ch = getchar()) != '\n' && ch != EOF) {
     }
 }
 
@@ -86,13 +87,16 @@ int check(double *all_coeffs) {
 
         char ans[MAX_LEN + 1] = {};
         static_assert(MAX_LEN == 3);
-        scanf("%8s", ans);
-        remove_trash();
-        if (!strcmp(ans, "Yes")) {
+        scanf("%" "s", ans);
+        
+        if (!strcmp(ans, "Yes") && (getchar() == '\n')) {
             return 1;
         }
-        else if (!strcmp(ans, "No")) {
+        else if (!strcmp(ans, "No") && (getchar() == '\n')) {
             return 0;
+        }
+        else {
+            remove_trash();
         }
     }
 }
@@ -114,7 +118,7 @@ void out_put(solve_equation res_of_solving) {
             printf("I've got it!\nYour equation has infinitely many solutions :)\n");
             break;
         default:
-            assert(0);
+            assert(0 && "Unknown number of roots");
             break;
     }
     printf("I'm waiting for you with new equations! Meow <3\n");
