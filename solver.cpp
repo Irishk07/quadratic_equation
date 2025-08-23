@@ -24,7 +24,7 @@ static void solve_lin(double *all_coeffs, solve_equation *res_of_solving);
 
 
 bool is_double_equal(double first_num, double second_num) {
-    return fabs(first_num - second_num) < EPS ? 1 : 0;
+    return fabs(first_num - second_num) < EPS;
 }
 
 static double fix_minus_zero(double root) {
