@@ -25,4 +25,4 @@ bool is_double_equal(double first_num, double second_num);
 //......................................................................
 void solve_sq(double *all_coeffs, solve_equation *res_of_solving);
 
-#endif
+#endif // SOLVER_H_

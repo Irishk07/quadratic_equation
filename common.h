@@ -36,4 +36,4 @@ struct solve_equation {
     double roots[MAX_COUNT_ROOTS];  ///< array of roots
 };
 
-#endif
+#endif //COMMON_H_

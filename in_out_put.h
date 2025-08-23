@@ -38,4 +38,4 @@ int check(double *all_coeffs);
 //......................................................................
 void out_put(solve_equation res_of_solving);
 
-#endif
+#endif // IN_OUT_PUT_H_
