@@ -17,10 +17,10 @@ int main() {
 
     int sum_error = 0;
     if ((sum_error = run_all_test()) != 0) {
-        printf("%d tests are failed\n", sum_error / TEST_FAILED);
+        printf(COLOR_RED "%d tests are failed\n" COLOR_RESET, sum_error / TEST_FAILED);
         return -1;
     }
-    printf("ALL TESTS RIGHT\n");
+    printf(COLOR_GREEN "ALL TESTS RIGHT\n" COLOR_RESET);
 
 #endif
 
@@ -32,14 +32,14 @@ int main() {
     int try_left = CNT_TRY;
     do {
         if (in_put_all_coeffs(all_coeffs) != SUCCESS || --try_left == 0) {
-            printf("You tried to do it %d times!\n", CNT_TRY);
-            printf("What's wrong with you....? :/");
+            printf(COLOR_RED "You tried to do it %d times!\n", CNT_TRY);
+            printf("What's wrong with you....? :/" COLOR_RESET);
             return -1;
         }
     }
     while (!check(all_coeffs));
 
-    printf("Great! Let's get to the solution :)\n");
+    printf(COLOR_CYAN "Great! Let's get to the solution :)\n" COLOR_RESET);
     print_cats(jumping_cat);
 
     solve_sq(all_coeffs, &res_of_solving);
@@ -50,8 +50,8 @@ int main() {
 }
 
 static void welcome() {
-    printf("Hello!\n");
-    printf("I am your assistant in solving quadratic equations\n");
+    printf(COLOR_PURPLE "Hello!\n");
+    printf("I am your assistant in solving quadratic equations\n" COLOR_RESET);
 
     print_cats(sitting_cat);
 }

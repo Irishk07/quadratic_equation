@@ -1,6 +1,14 @@
 #ifndef COMMON_H_
 #define COMMON_H_
 
+#define COLOR_RED "\x1b[91m"
+#define COLOR_GREEN "\x1b[92m"
+#define COLOR_YELLOW "\x1b[93m"
+#define COLOR_BLUE "\x1b[94m"
+#define COLOR_PURPLE "\x1b[95m"
+#define COLOR_CYAN "\x1b[96m"
+#define COLOR_RESET "\x1b[0m"
+
 const int MAX_COUNT_ROOTS = 2;
 const int COUNT_COEFF = 3;
 
