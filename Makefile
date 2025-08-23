@@ -13,8 +13,11 @@ CPPOBJ = $(CPPSRC:%.cpp=build/%.o)
 
 HEADER_DEPENDS = $(CPPOBJ:%.o=%.d)
 
-.PHONY: all
+.PHONY: all run
 all: prog.exe
+
+run: all
+	./prog.exe
 
 $(CPPOBJ): build/%.o: %.cpp
 	$(CXX) $(CPPFLAGS) -MP -MMD -c $< -o $@
