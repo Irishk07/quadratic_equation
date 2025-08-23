@@ -19,8 +19,8 @@ int main() {
     }
     printf("ALL TESTS RIGHT\n");
 
-    double all_coeffs [] = {0, 0, 0};
-    solve_equation res_of_solving = {0, {0, 0}};
+    double all_coeffs [] = {0.f, 0.f, 0.f};
+    solve_equation res_of_solving = {0, {0.f, 0.f}};
 
     welcome();
 
