@@ -6,6 +6,16 @@
 const double EPS = 1e-9;
 
 //......................................................................
+//! Compares two double numbers
+//!
+//! @param[in] first_num - first double number
+//! @param[in] second_num - second double number
+//!
+//! @return 1 if first number is equal to the second and 0 otherwise
+//......................................................................
+bool is_double_equal(double first_num, double second_num);
+
+//......................................................................
 //! Solves quadratic equation ax^2 + bx + c = 0
 //!
 //! @param[in] all_coeffs - pointer on array 

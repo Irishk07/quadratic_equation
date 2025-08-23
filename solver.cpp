@@ -4,16 +4,6 @@
 #include "common.h"
 
 //......................................................................
-//! Compares two double numbers
-//!
-//! @param[in] first_num - first double number
-//! @param[in] second_num - second double number
-//!
-//! @return 1 if first number is equal to the second and 0 otherwise
-//......................................................................
-static bool is_double_equal(double first_num, double second_num);
-
-//......................................................................
 //! Turns minus zero into zero
 //!
 //! @param[in] root - root of equation
@@ -33,7 +23,7 @@ static double fix_minus_zero(double root);
 static void solve_lin(double *all_coeffs, solve_equation *res_of_solving);
 
 
-static bool is_double_equal(double first_num, double second_num) {
+bool is_double_equal(double first_num, double second_num) {
     return fabs(first_num - second_num) < EPS ? 1 : 0;
 }
 
@@ -45,7 +35,8 @@ static double fix_minus_zero(double root) {
 }
 
 void solve_sq(double *all_coeffs, solve_equation *res_of_solving) {
-    assert(all_coeffs != NULL && res_of_solving != NULL);
+    assert(all_coeffs != NULL);
+    assert(res_of_solving != NULL);
 
     double a = all_coeffs[0];
     double b = all_coeffs[1];
@@ -65,8 +56,8 @@ void solve_sq(double *all_coeffs, solve_equation *res_of_solving) {
         res_of_solving -> roots[0] = x;
     }
     else if (discr > 0) {
-        double x1 = (-b + sqrt(discr)) / (2 * a);
-        double x2 = (-b - sqrt(discr)) / (2 * a);
+        double x1 = (-b - sqrt(discr)) / (2 * a);
+        double x2 = (-b + sqrt(discr)) / (2 * a);
         res_of_solving -> count_roots = TWO;
         res_of_solving -> roots[0] = x1;
         res_of_solving -> roots[1] = x2;

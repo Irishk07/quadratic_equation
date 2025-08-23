@@ -4,6 +4,7 @@
 #include "solver.h"
 #include "in_out_put.h"
 #include "cat.h"
+#include "test.h"
 
 //......................................................................
 //! Greets the user and draws a sitting cat
@@ -11,6 +12,8 @@
 static void welcome();
 
 int main() {
+    run_all_test();
+
     double all_coeffs [] = {0, 0, 0};
     solve_equation res_of_solving = {0, {0, 0}};
 
