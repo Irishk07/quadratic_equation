@@ -41,7 +41,7 @@ static status in_put_one_coeff(double *all_coeffs, int num_coeff) {
 
     int try_left = CNT_TRY;
     while (try_left > 0) {
-        printf(COLOR_BLUE "Enter the coefficient %c:\n" COLOR_RESET, 'a' + num_coeff);
+        printf(COLOR_BLUE "Enter the coefficient %c:\n" COLOR_GREEN, 'a' + num_coeff);
 
         if (scanf("%lf", all_coeffs) == 1 && (getchar() == '\n')) {
             break;
@@ -83,7 +83,7 @@ int check(double *all_coeffs) {
     printf("Is everything right?\n" COLOR_RESET);
 
     while (true) {
-        printf(COLOR_RED "Enter <<Yes>> or <<No>>\n" COLOR_RESET);
+        printf(COLOR_RED "Enter <<Yes>> or <<No>>\n" COLOR_GREEN);
 
         char ans[MAX_LEN + 1] = {};
         static_assert(MAX_LEN == 3);
