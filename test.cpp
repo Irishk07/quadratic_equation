@@ -3,6 +3,7 @@
 #include "common.h"
 #include "solver.h"
 
+#include <assert.h>
 #include <math.h>
 #include <stdio.h>
 
@@ -34,24 +35,38 @@ status run_one_test(double a, double b, double c, int cnt_roots_test, double roo
     return SUCCESS;
 }
 
-int run_all_test() { 
+int run_all_test(char *filename) {
     int error_sum = 0;
+    double a = 0, b = 0, c = 0;
+    int cnt_roots_test = 0;
+    double root1 = 0, root2 = 0;
 
-    //                       +-------+---------+-----+--------+-------+--------+
-    //                       |   a   |    b    |  c  | nRoots |   x1  |   x2   |
-    error_sum += run_one_test(      1,       -5,    6,     TWO,      2,       3); //2 3
-    error_sum += run_one_test(      2,       -9,    4,     TWO,    0.5,       4); //0.5 4
-    error_sum += run_one_test(      1,        4,    4,     ONE,     -2,     NAN); //-2
-    error_sum += run_one_test(   1000,    -2000, 1000,     ONE,      1,       0); //1
-    error_sum += run_one_test(      7,        8,  150,    ZERO,      0,       0); //no
-    error_sum += run_one_test(    -18,      -68, -550,    ZERO,      0,       0); //no
-    error_sum += run_one_test(      0,        5,   -8,     ONE,    1.6,       0); //1.6
-    error_sum += run_one_test(1000000,        0,   -1,     TWO, -0.001,   0.001); //-0.001 0.001
-    error_sum += run_one_test(      1, -1000000,    0,     TWO,      0, 1000000); //0 1000000
-    error_sum += run_one_test(      0,        0,  -15,    ZERO,      0,       0); //no
-    error_sum += run_one_test(      0,       -8,    0,     ONE,      0,       0); //0
-    error_sum += run_one_test(      9,        0,    0,     ONE,      0,       0); //0
-    error_sum += run_one_test(      0,        0,    0,     INF,      0,       0); //inf
-    //                       +-------+---------+-----+--------+-------+--------+
+    FILE *tests = fopen(filename, "r");
+    assert (tests != NULL);
+
+    char head [MAX_HEAD_LEN] = {0};
+    fgets(head, MAX_HEAD_LEN, tests);
+
+    while (fscanf(tests, "%lg %*c %lg %*c %lg %*c %d %*c %lg %*c %lg", &a, &b, &c, &cnt_roots_test, &root1, &root2) == 6) {
+        error_sum += run_one_test(a, b, c, cnt_roots_test, root1, root2);
+    }
+
     return error_sum;
+
+    // //                       +-------+---------+-----+--------+-------+--------+
+    // //                       |   a   |    b    |  c  | nRoots |   x1  |   x2   |
+    // error_sum += run_one_test(      1,       -5,    6,     TWO,      2,       3); 
+    // error_sum += run_one_test(      2,       -9,    4,     TWO,    0.5,       4); 
+    // error_sum += run_one_test(      1,        4,    4,     ONE,     -2,     NAN); 
+    // error_sum += run_one_test(   1000,    -2000, 1000,     ONE,      1,     NAN); 
+    // error_sum += run_one_test(      7,        8,  150,    ZERO,    NAN,     NAN);
+    // error_sum += run_one_test(    -18,      -68, -550,    ZERO,    NAN,     NAN); 
+    // error_sum += run_one_test(      0,        5,   -8,     ONE,    1.6,     NAN); 
+    // error_sum += run_one_test(1000000,        0,   -1,     TWO, -0.001,   0.001); 
+    // error_sum += run_one_test(      1, -1000000,    0,     TWO,      0, 1000000); 
+    // error_sum += run_one_test(      0,        0,  -15,    ZERO,    NAN,     NAN); 
+    // error_sum += run_one_test(      0,       -8,    0,     ONE,      0,     NAN);
+    // error_sum += run_one_test(      9,        0,    0,     ONE,      0,     NAN); 
+    // error_sum += run_one_test(      0,        0,    0,     INF,    NAN,     NAN); 
+    // //                       +-------+---------+-----+--------+-------+--------+
 }
