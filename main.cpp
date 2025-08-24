@@ -3,11 +3,13 @@
 #include "cat.h"
 #include "colors.h"
 #include "in_out_put.h"
+#include "pass_arg.h"
 #include "solver.h"
 #include "test.h"
 
 #include <assert.h>
 #include <stdio.h>
+#include <string.h>
 
 //......................................................................
 //! Greets the user and draws a sitting cat
@@ -15,6 +17,8 @@
 static void welcome();
 
 int main(int argc, char **argv) {
+
+    pass_args(argc, argv);
 
 #ifndef NDEBUG
 
