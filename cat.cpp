@@ -1,7 +1,9 @@
-#include <stdio.h>
-#include <errno.h>
 #include "cat.h"
+
 #include "common.h"
+
+#include <errno.h>
+#include <stdio.h>
 
 #ifdef PRINT_CAT_FROM_FILE
 

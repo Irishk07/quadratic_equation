@@ -1,10 +1,12 @@
-#include <stdio.h>
-#include <assert.h>
 #include "common.h"
-#include "solver.h"
-#include "in_out_put.h"
+
 #include "cat.h"
+#include "in_out_put.h"
+#include "solver.h"
 #include "test.h"
+
+#include <assert.h>
+#include <stdio.h>
 
 //......................................................................
 //! Greets the user and draws a sitting cat

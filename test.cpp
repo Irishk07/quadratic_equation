@@ -1,12 +1,15 @@
-#include <stdio.h>
 #include "test.h"
-#include "solver.h"
+
 #include "common.h"
+#include "solver.h"
+
+#include <math.h>
+#include <stdio.h>
 
 status run_one_test(double a, double b, double c, int cnt_roots_test, double root1, double root2) {
     double all_coeffs_test [] = {a, b, c};
     solve_equation res_of_solving_test = {0, {0, 0}};
-    
+
     solve_sq(all_coeffs_test, &res_of_solving_test);
 
     if (cnt_roots_test != res_of_solving_test.count_roots) {
@@ -38,7 +41,7 @@ int run_all_test() {
     //                       |   a   |    b    |  c  | nRoots |   x1  |   x2   |
     error_sum += run_one_test(      1,       -5,    6,     TWO,      2,       3); //2 3
     error_sum += run_one_test(      2,       -9,    4,     TWO,    0.5,       4); //0.5 4
-    error_sum += run_one_test(      1,        4,    4,     ONE,     -2,       0); //-2
+    error_sum += run_one_test(      1,        4,    4,     ONE,     -2,     NAN); //-2
     error_sum += run_one_test(   1000,    -2000, 1000,     ONE,      1,       0); //1
     error_sum += run_one_test(      7,        8,  150,    ZERO,      0,       0); //no
     error_sum += run_one_test(    -18,      -68, -550,    ZERO,      0,       0); //no

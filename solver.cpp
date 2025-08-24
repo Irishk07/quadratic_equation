@@ -1,7 +1,9 @@
+#include "solver.h"
+
+#include "common.h"
+
 #include <assert.h>
 #include <math.h>
-#include "solver.h"
-#include "common.h"
 
 //......................................................................
 //! Turns minus zero into zero

@@ -1,8 +1,10 @@
-#include <stdio.h>
-#include <assert.h>
-#include <string.h>
 #include "in_out_put.h"
+
 #include "common.h"
+
+#include <assert.h>
+#include <stdio.h>
+#include <string.h>
 
 //......................................................................
 //! Input one coefficient of equation
