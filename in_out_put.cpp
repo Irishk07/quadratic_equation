@@ -3,8 +3,24 @@
 #include "common.h"
 
 #include <assert.h>
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+
+//......................................................................
+//! Detects the sign of a number
+//!
+//! @param[in] ans - const pointer to the array being compared
+//! @param[in] reference - const pointer to the reference array 
+//!
+//! @return integer indicating the result of the comparison
+//......................................................................
+static int compare_string(const char *ans, const char *reference);
+
+//......................................................................
+//! Clears the input buffer
+//......................................................................
+static void remove_trash();
 
 //......................................................................
 //! Input one coefficient of equation
@@ -26,11 +42,14 @@ static status in_put_one_coeff(double *all_coeffs, int num_coeff);
 //......................................................................
 static char sign(double coefficient);
 
-//......................................................................
-//! Clears the input buffer
-//......................................................................
-static void remove_trash();
 
+static int compare_string(const char *ans, const char *reference) {
+    while (*ans && (tolower(*ans) == tolower(*reference))) {
+        ans++;
+        reference++;
+    }
+    return *(const unsigned char*)ans - *(const unsigned char*)reference;
+}
 
 static void remove_trash() {
     int ch = '\0';
@@ -91,10 +110,10 @@ int check(double *all_coeffs) {
         static_assert(MAX_LEN == 3);
         scanf("%" "s", ans);
         
-        if (!strcmp(ans, "Yes") && (getchar() == '\n' || getchar() == EOF)) { // stricmp (nocase)
+        if (!compare_string(ans, "Yes") && (getchar() == '\n' || getchar() == EOF)) { // stricmp (nocase)
             return 1;
         }
-        else if (!strcmp(ans, "No") && (getchar() == '\n' || getchar() == EOF)) {
+        else if (!compare_string(ans, "No") && (getchar() == '\n' || getchar() == EOF)) {
             return 0;
         }
         else {
