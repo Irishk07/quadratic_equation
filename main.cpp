@@ -13,12 +13,17 @@
 //......................................................................
 static void welcome();
 
-int main() {
+int main(int argc, char **argv) {
 
 #ifndef NDEBUG
 
+    if (argc != 2) {
+        return -1;
+    }
+
     int sum_error = 0;
-    if ((sum_error = run_all_test()) != 0) {
+    char *filename = argv[1];
+    if ((sum_error = run_all_test(filename)) != 0) {
         printf(COLOR_RED "%d tests are failed\n" COLOR_RESET, sum_error / TEST_FAILED);
         return -1;
     }
