@@ -14,16 +14,16 @@ int pass_args(int argc, char **argv) {
         for (int fg = 0; flags_name[fg]; ++fg) {
             char *flag_now = flags_name[fg];
 
+            int cnt_dash = 0;
+            while (*argv_now_one == '-') {
+                ++cnt_dash;
+                ++argv_now_one;
+            }
+
             int len_of_str = 0;
             while (*flag_now && *argv_now_one && (*flag_now == *argv_now_one)) {
                 ++len_of_str;
                 ++flag_now;
-                ++argv_now_one;
-            }
-
-            int cnt_dash = 0;
-            while (*argv_now_one == '-') {
-                ++cnt_dash;
                 ++argv_now_one;
             }
 
