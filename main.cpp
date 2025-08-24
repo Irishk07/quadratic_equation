@@ -1,6 +1,7 @@
 #include "common.h"
 
 #include "cat.h"
+#include "colors.h"
 #include "in_out_put.h"
 #include "solver.h"
 #include "test.h"
@@ -24,10 +25,12 @@ int main(int argc, char **argv) {
     int sum_error = 0;
     char *filename = argv[1];
     if ((sum_error = run_all_test(filename)) != 0) {
-        printf(COLOR_RED "%d tests are failed\n" COLOR_RESET, sum_error / TEST_FAILED);
+        //printf(COLOR_RED "%d tests are failed\n" COLOR_RESET, sum_error / TEST_FAILED);
+        //printf(color_text(COLOR_RED, "%d tests are failed\n"), sum_error / TEST_FAILED);
+        color_printf(COLOR_RED, "%d tests are failed\n", sum_error / TEST_FAILED);
         return -1;
     }
-    printf(COLOR_GREEN "ALL TESTS RIGHT\n" COLOR_RESET);
+    color_print(COLOR_GREEN, "ALL TESTS RIGHT\n");
 
 #endif
 
@@ -39,14 +42,14 @@ int main(int argc, char **argv) {
     int try_left = CNT_TRY;
     do {
         if (in_put_all_coeffs(all_coeffs) != SUCCESS || --try_left == 0) {
-            printf(COLOR_RED "You tried to do it %d times!\n", CNT_TRY);
-            printf("What's wrong with you....? :/" COLOR_RESET);
+            color_printf(COLOR_RED, "You tried to do it %d times!\n", CNT_TRY);
+            color_print(COLOR_RED, "What's wrong with you....? :/\n");
             return -1;
         }
     }
     while (!check(all_coeffs));
 
-    printf(COLOR_CYAN "Great! Let's get to the solution :)\n" COLOR_RESET);
+    color_print(COLOR_CYAN, "Great! Let's get to the solution :)\n");
     print_cats(jumping_cat);
 
     solve_sq(all_coeffs, &res_of_solving);
@@ -57,8 +60,8 @@ int main(int argc, char **argv) {
 }
 
 static void welcome() {
-    printf(COLOR_PURPLE "Hello!\n");
-    printf("I am your assistant in solving quadratic equations\n" COLOR_RESET);
+    color_print(COLOR_PURPLE, "Hello!\n");
+    color_print(COLOR_PURPLE, "I am your assistant in solving quadratic equations\n");
 
     print_cats(sitting_cat);
 }

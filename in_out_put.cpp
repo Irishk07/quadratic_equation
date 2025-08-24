@@ -1,5 +1,6 @@
 #include "in_out_put.h"
 
+#include "colors.h"
 #include "common.h"
 
 #include <assert.h>
@@ -62,7 +63,7 @@ static status in_put_one_coeff(double *all_coeffs, int num_coeff) {
 
     int try_left = CNT_TRY;
     while (try_left > 0) {
-        printf(COLOR_BLUE "Enter the coefficient %c:\n" COLOR_GREEN, 'a' + num_coeff);
+        color_printf(COLOR_BLUE, "Enter the coefficient %c:\n", 'a' + num_coeff);
 
         if (scanf("%lf", all_coeffs) == 1 && (getchar() == '\n')) {
             break;
@@ -80,8 +81,8 @@ static status in_put_one_coeff(double *all_coeffs, int num_coeff) {
 status in_put_all_coeffs(double *all_coeffs) {
     assert(all_coeffs != NULL);
 
-    printf(COLOR_BLUE "Please enter the coefficients of the equation you want to solve\n" COLOR_RESET);
-    printf(COLOR_RED "Enter each coefficient from a new line\n" COLOR_RESET);
+    color_print(COLOR_BLUE, "Please enter the coefficients of the equation you want to solve\n");
+    color_print(COLOR_RED, "Enter each coefficient from a new line\n");
 
     for (int i = 0; i < COUNT_COEFF; ++i) {
         status res = in_put_one_coeff(&all_coeffs[i], i);
@@ -99,12 +100,12 @@ static char sign(double coefficient) {
 int check(double *all_coeffs) {
     assert(all_coeffs != NULL);
 
-    printf(COLOR_CYAN "Your equation looks like this:\n");
-    printf("%lgx^2 %c %lgx %c %lg = 0\n", all_coeffs[0], sign(all_coeffs[1]), abs(all_coeffs[1]), sign(all_coeffs[2]), abs(all_coeffs[2]));
-    printf("Is everything right?\n" COLOR_RESET);
+    color_print(COLOR_CYAN, "Your equation looks like this:\n");
+    color_printf(COLOR_CYAN, "%lgx^2 %c %lgx %c %lg = 0\n", all_coeffs[0], sign(all_coeffs[1]), abs(all_coeffs[1]), sign(all_coeffs[2]), abs(all_coeffs[2]));
+    color_print(COLOR_CYAN, "Is everything right?\n");
 
     while (true) {
-        printf(COLOR_RED "Enter <<Yes>> or <<No>>\n" COLOR_GREEN);
+        color_print(COLOR_RED, "Enter <<Yes>> or <<No>>\n");
 
         char ans[MAX_LEN + 1] = {};
         static_assert(MAX_LEN == 3);
@@ -126,22 +127,22 @@ int check(double *all_coeffs) {
 void out_put(solve_equation res_of_solving) {
     switch (res_of_solving.count_roots) {
         case ZERO:
-            printf(COLOR_GREEN "Your equation has no solutions :(\n" COLOR_RESET);
+            color_print(COLOR_GREEN, "Your equation has no solutions :(\n");
             break;
         case ONE:
-            printf(COLOR_GREEN "I've got it!\nThe root of your equation is:\n");
-            printf("x = %lg\n" COLOR_RESET, res_of_solving.roots[0]);
+            color_print(COLOR_GREEN, "I've got it!\nThe root of your equation is:\n");
+            color_printf(COLOR_GREEN, "x = %lg\n", res_of_solving.roots[0]);
             break;
         case TWO:
-            printf(COLOR_GREEN "I've got it!\nThe roots of your equation are:\n");
-            printf("x1 = %lg, x2 = %lg\n" COLOR_RESET, res_of_solving.roots[0], res_of_solving.roots[1]);
+            color_print(COLOR_GREEN, "I've got it!\nThe roots of your equation are:\n");
+            color_printf(COLOR_GREEN, "x1 = %lg, x2 = %lg\n", res_of_solving.roots[0], res_of_solving.roots[1]);
             break;
         case INF:
-            printf(COLOR_GREEN "I've got it!\nYour equation has infinitely many solutions :)\n" COLOR_RESET);
+            color_print(COLOR_GREEN, "I've got it!\nYour equation has infinitely many solutions :)\n");
             break;
         default:
             assert(0 && "Unknown number of roots");
             break;
     }
-    printf(COLOR_PURPLE "I'm waiting for you with new equations! Meow <3\n" COLOR_RESET);
+    color_print(COLOR_PURPLE, "I'm waiting for you with new equations! Meow <3\n");
 }

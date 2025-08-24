@@ -1,5 +1,6 @@
 #include "test.h"
 
+#include "colors.h"
 #include "common.h"
 #include "solver.h"
 
@@ -14,19 +15,19 @@ status run_one_test(double a, double b, double c, int cnt_roots_test, double roo
     solve_sq(all_coeffs_test, &res_of_solving_test);
 
     if (cnt_roots_test != res_of_solving_test.count_roots) {
-        printf("FAILED: programm with coefficients a = %lg, b = %lg, c = %lg output cnt_roots = %d, but should be cnt_roots = %d\n", 
+        color_printf(COLOR_RED, "FAILED: programm with coefficients a = %lg, b = %lg, c = %lg output cnt_roots = %d, but should be cnt_roots = %d\n", 
                 a, b, c, res_of_solving_test.count_roots, cnt_roots_test);
 
         return TEST_FAILED;
     }
     else if (cnt_roots_test == 1 && !is_double_equal(res_of_solving_test.roots[0], root1)) {
-        printf("FAILED: programm with coefficients a = %lg, b = %lg, c = %lg output x = %lg, but should be x = %lg\n", 
+        color_printf(COLOR_RED, "FAILED: programm with coefficients a = %lg, b = %lg, c = %lg output x = %lg, but should be x = %lg\n", 
                 a, b, c, res_of_solving_test.roots[0], root1);
 
         return TEST_FAILED;
     }
     else if (cnt_roots_test == 2 && !(is_double_equal(res_of_solving_test.roots[0], root1) && is_double_equal(res_of_solving_test.roots[1], root2))) {
-        printf("FAILED: programm with coefficients a = %lg, b = %lg, c = %lg output x1 = %lg, x2 = %lg, but should be x1 = %lg, x2 = %lg\n", 
+        color_printf(COLOR_RED, "FAILED: programm with coefficients a = %lg, b = %lg, c = %lg output x1 = %lg, x2 = %lg, but should be x1 = %lg, x2 = %lg\n", 
                 a, b, c, res_of_solving_test.roots[0], res_of_solving_test.roots[1], root1, root2);
 
         return TEST_FAILED;

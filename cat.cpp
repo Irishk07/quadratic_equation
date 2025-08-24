@@ -1,5 +1,6 @@
 #include "cat.h"
 
+#include "colors.h"
 #include "common.h"
 
 #include <errno.h>
@@ -16,10 +17,10 @@ void print_cats(const char *filename) {
 
     int ch = 0;
     while ((ch = getc(cat)) != EOF) {
-        printf(COLOR_YELLOW "%c", ch);
+        color_printf(COLOR_YELLOW, "%c", ch);
     }
 
-    printf(COLOR_RESET "\n");
+    printf("\n");
     
     fclose(cat);
 }
@@ -27,7 +28,7 @@ void print_cats(const char *filename) {
 #else
 
 void print_cats(const char *cat) {
-    printf(COLOR_YELLOW "%s" COLOR_RESET, cat);
+    color_printf(COLOR_YELLOW, "%s", cat);
 }
 
 #endif
