@@ -1,0 +1,1 @@
+int pass_args(int argc, char **argv);
