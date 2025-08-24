@@ -15,7 +15,7 @@
 //!
 //! @return integer indicating the result of the comparison
 //......................................................................
-static int compare_string(const char *ans, const char *reference);
+static int string_compare_nocase(const char *s1, const char *s2);
 
 //......................................................................
 //! Clears the input buffer
@@ -43,12 +43,12 @@ static status in_put_one_coeff(double *all_coeffs, int num_coeff);
 static char sign(double coefficient);
 
 
-static int compare_string(const char *ans, const char *reference) {
-    while (*ans && (tolower(*ans) == tolower(*reference))) {
-        ans++;
-        reference++;
+static int string_compare_nocase(const char *s1, const char *s2) {
+    while (*s1 && (tolower(*s1) == tolower(*s2))) {
+        s1++;
+        s2++;
     }
-    return *(const unsigned char*)ans - *(const unsigned char*)reference;
+    return *(const unsigned char*)s1 - *(const unsigned char*)s2;
 }
 
 static void remove_trash() {
@@ -110,10 +110,11 @@ int check(double *all_coeffs) {
         static_assert(MAX_LEN == 3);
         scanf("%" "s", ans);
         
-        if (!compare_string(ans, "Yes") && (getchar() == '\n' || getchar() == EOF)) { // stricmp (nocase)
+        int ch = 0;
+        if (!string_compare_nocase(ans, "Yes") && ((ch = getchar()) == '\n' || ch == EOF)) { // string_compare_nocase (nocase)
             return 1;
         }
-        else if (!compare_string(ans, "No") && (getchar() == '\n' || getchar() == EOF)) {
+        else if (!string_compare_nocase(ans, "No") && ((ch = getchar()) == '\n' || ch == EOF)) {
             return 0;
         }
         else {
