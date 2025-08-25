@@ -2,33 +2,29 @@
 
 #include "colors.h"
 #include "common.h"
+#include "pass_arg.h"
 
 #include <errno.h>
 #include <stdio.h>
 
-#ifdef PRINT_CAT_FROM_FILE
+void print_cats(status_of_finding elem_is_found, cat_kinds num_cat) {
+    if (elem_is_found.filename_cat[num_cat] != NULL) {
+        FILE *cat = fopen(elem_is_found.filename_cat[num_cat], "r");
 
-void print_cats(const char *filename) {
-    FILE *cat = fopen(filename, "r");
+        if (cat == NULL) {
+            perror("File opening error\n");
+        }
 
-    if (cat == NULL) {
-        perror("File opening error\n");
+        int ch = 0;
+        while ((ch = getc(cat)) != EOF) {
+            color_printf(COLOR_YELLOW, "%c", ch);
+        }
+
+        printf("\n");
+        
+        fclose(cat);
     }
-
-    int ch = 0;
-    while ((ch = getc(cat)) != EOF) {
-        color_printf(COLOR_YELLOW, "%c", ch);
+    else {
+        color_printf(COLOR_YELLOW, "%s", cats[num_cat]);
     }
-
-    printf("\n");
-    
-    fclose(cat);
 }
-
-#else
-
-void print_cats(const char *cat) {
-    color_printf(COLOR_YELLOW, "%s", cat);
-}
-
-#endif

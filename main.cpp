@@ -13,35 +13,33 @@
 
 //......................................................................
 //! Greets the user and draws a sitting cat
+//!
+//! @param[in] elem_is_found - structure that contains infromation
+//!                            about cat
 //......................................................................
-static void welcome();
+static void welcome(status_of_finding elems_is_found);
 
-int main(int argc, char **argv) {
-
-    pass_args(argc, argv);
-
-#ifndef NDEBUG
-
-    if (argc != 2) {
+int main(int argc, const char **argv) {
+    status_of_finding elems_is_found = {};
+    
+    if (pass_args(argc, argv, &elems_is_found) != SUCCESS) {
         return -1;
     }
 
-    int sum_error = 0;
-    char *filename = argv[1];
-    if ((sum_error = run_all_test(filename)) != 0) {
-        //printf(COLOR_RED "%d tests are failed\n" COLOR_RESET, sum_error / TEST_FAILED);
-        //printf(color_text(COLOR_RED, "%d tests are failed\n"), sum_error / TEST_FAILED);
-        color_printf(COLOR_RED, "%d tests are failed\n", sum_error / TEST_FAILED);
-        return -1;
-    }
-    color_print(COLOR_GREEN, "ALL TESTS RIGHT\n");
+    if (elems_is_found.filename_test != NULL) {
+        int sum_error = 0;
 
-#endif
+        if ((sum_error = run_all_test(elems_is_found.filename_test)) != 0) {
+            color_printf(COLOR_RED, "%d tests are failed\n", sum_error / TEST_FAILED);
+            return -1;
+        }
+        color_print(COLOR_GREEN, "ALL TESTS RIGHT\n");
+    }
 
     double all_coeffs [] = {0.f, 0.f, 0.f};
     solve_equation res_of_solving = {0, {0.f, 0.f}};
 
-    welcome();
+    welcome(elems_is_found);
 
     int try_left = CNT_TRY;
     do {
@@ -54,7 +52,7 @@ int main(int argc, char **argv) {
     while (!check(all_coeffs));
 
     color_print(COLOR_CYAN, "Great! Let's get to the solution :)\n");
-    print_cats(jumping_cat);
+    print_cats(elems_is_found, JUMPING_CAT);
 
     solve_sq(all_coeffs, &res_of_solving);
 
@@ -63,9 +61,9 @@ int main(int argc, char **argv) {
     return 0; 
 }
 
-static void welcome() {
+static void welcome(status_of_finding elems_is_found) {
     color_print(COLOR_PURPLE, "Hello!\n");
     color_print(COLOR_PURPLE, "I am your assistant in solving quadratic equations\n");
 
-    print_cats(sitting_cat);
+    print_cats(elems_is_found, SITTING_CAT);
 }
