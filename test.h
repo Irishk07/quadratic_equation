@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-const char MAX_HEAD_LEN = 100;
+const int MAX_HEAD_LEN = 128;
 
 //......................................................................
 //! Tests the solution of the equation once
@@ -28,6 +28,6 @@ status run_one_test(double a, double b, double c, int cnt_roots_test, double roo
 //!
 //! @return sum of errors
 //......................................................................
-int run_all_test(char *filename);
+int run_all_test(const char *filename);
 
 #endif //TEST_H_
