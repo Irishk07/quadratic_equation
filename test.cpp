@@ -36,21 +36,23 @@ status run_one_test(double a, double b, double c, int cnt_roots_test, double roo
     return SUCCESS;
 }
 
-int run_all_test(char *filename) {
-    int error_sum = 0;
-    double a = 0, b = 0, c = 0;
-    int cnt_roots_test = 0;
-    double root1 = 0, root2 = 0;
-
+int run_all_test(const char *filename) {
     FILE *tests = fopen(filename, "r");
     assert (tests != NULL);
 
     char head [MAX_HEAD_LEN] = {0};
     fgets(head, MAX_HEAD_LEN, tests);
 
+    int error_sum = 0;
+    double a = 0, b = 0, c = 0;
+    int cnt_roots_test = 0;
+    double root1 = 0, root2 = 0;
+
     while (fscanf(tests, "%lg %*c %lg %*c %lg %*c %d %*c %lg %*c %lg", &a, &b, &c, &cnt_roots_test, &root1, &root2) == 6) {
         error_sum += run_one_test(a, b, c, cnt_roots_test, root1, root2);
     }
+
+    fclose(tests);
 
     return error_sum;
 
