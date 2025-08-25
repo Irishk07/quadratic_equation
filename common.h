@@ -24,7 +24,8 @@ enum status {
     IN_PUT_ERROR = 1,
     CHECK_ERROR = 2,
     KEEP_CHECK = 3,
-    TEST_FAILED = 4
+    TEST_FAILED = 4,
+    INVALID_FLAG = 5
 };
 
 //......................................................................
