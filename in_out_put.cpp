@@ -5,6 +5,7 @@
 
 #include <assert.h>
 #include <ctype.h>
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -146,5 +147,5 @@ void out_put(solve_equation res_of_solving) {
     }
     color_print(COLOR_PURPLE, "I'm waiting for you with new equations! Meow <3\n");
 
-    color_print(COLOR_RED, "P.S. for me: COMMIT ON GITHUB");
+    color_print(COLOR_RED, "P.S. for me: COMMIT ON GITHUB\n");
 }
