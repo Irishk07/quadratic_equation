@@ -4,6 +4,7 @@
 
 #include <assert.h>
 #include <math.h>
+#include <string.h>
 
 //......................................................................
 //! Turns minus zero into zero
@@ -27,6 +28,44 @@ static void solve_lin(double *all_coeffs, solve_equation *res_of_solving);
 
 bool is_double_equal(double first_num, double second_num) {
     return fabs(first_num - second_num) < EPS;
+}
+
+bool my_isnan(double x) {
+    /*
+             +------+----------+----------+
+             | sign | exponent | mantissa |
+        Bites|  1   |    11    |    52    |
+        Mean | 0/1  |     1    |   0/1    |
+             +------+----------+----------+
+    */
+
+    long x_long = 0;
+    memcpy(&x_long, &x, sizeof(x));
+    long reference = 0x7FF << 52;
+    x_long = x_long & reference;
+    if (x_long == reference) {
+        return true;
+    }
+    return false;
+}
+
+bool my_isinf(double x) {
+    /*
+             +------+----------+----------+
+             | sign | exponent | mantissa |
+        Bites|  1   |    11    |    52    |
+        Mean | 0/1  |     1    |     0    |
+             +------+----------+----------+
+    */
+
+    long x_long = 0;
+    memcpy(&x_long, &x, sizeof(x));
+    long reference = 0x7FF << 63;
+    x_long = x_long & reference;
+    if (x_long == reference) {
+        return true;
+    }
+    return false;
 }
 
 static double fix_minus_zero(double root) {

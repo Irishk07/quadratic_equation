@@ -25,4 +25,23 @@ bool is_double_equal(double first_num, double second_num);
 //......................................................................
 void solve_sq(double *all_coeffs, solve_equation *res_of_solving);
 
+//......................................................................
+//! Checks whether the number is equal to NAN
+//!
+//! @param[in] x - number
+//! 
+//! @return true if NAN and false otherwise
+//......................................................................
+bool my_isnan(double x);
+
+
+//......................................................................
+//! Checks whether the number is equal to INF
+//!
+//! @param[in] x - number
+//! 
+//! @return true if INF and false otherwise
+//......................................................................
+bool my_isinf(double x);
+
 #endif // SOLVER_H_
