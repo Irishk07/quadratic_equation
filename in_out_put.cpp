@@ -145,4 +145,6 @@ void out_put(solve_equation res_of_solving) {
             break;
     }
     color_print(COLOR_PURPLE, "I'm waiting for you with new equations! Meow <3\n");
+
+    color_print(COLOR_RED, "P.S. for me: COMMIT ON GITHUB");
 }
