@@ -40,10 +40,10 @@ int main(int argc, const char **argv) {
             return -1;
         }
         else if (sum_error == -1) {
-            color_print(COLOR_RED, "Invalid file with tests name");
+            color_printf(COLOR_RED, "Invalid file with tests name\n");
             return -1;
         }
-        color_print(COLOR_GREEN, "ALL TESTS RIGHT\n");
+        color_printf(COLOR_GREEN, "ALL TESTS RIGHT\n");
 
         return 0;
     }
@@ -57,13 +57,13 @@ int main(int argc, const char **argv) {
     do {
         if (in_put_all_coeffs(all_coeffs) != SUCCESS || --try_left == 0) {
             color_printf(COLOR_RED, "You tried to do it %d times!\n", CNT_TRY);
-            color_print(COLOR_RED, "What's wrong with you....? :/\n");
+            color_printf(COLOR_RED, "What's wrong with you....? :/\n");
             return -1;
         }
     }
     while (!check(all_coeffs));
 
-    color_print(COLOR_CYAN, "Great! Let's get to the solution :)\n");
+    color_printf(COLOR_CYAN, "Great! Let's get to the solution :)\n");
     print_cats(elems_is_found, JUMPING_CAT);
 
     solve_sq(all_coeffs, &res_of_solving);
@@ -74,8 +74,8 @@ int main(int argc, const char **argv) {
 }
 
 static void welcome(status_of_finding elems_is_found) {
-    color_print(COLOR_PURPLE, "Hello!\n");
-    color_print(COLOR_PURPLE, "I am your assistant in solving quadratic equations\n");
+    color_printf(COLOR_PURPLE, "Hello!\n");
+    color_printf(COLOR_PURPLE, "I am your assistant in solving quadratic equations\n");
 
     print_cats(elems_is_found, SITTING_CAT);
 }

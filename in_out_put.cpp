@@ -72,7 +72,7 @@ static status in_put_one_coeff(double *one_coeff, int num_coeff) {
                 break; 
             }
             else if (my_isinf(*one_coeff)) {
-                color_print(COLOR_RED, "You tried to enter too big number\n");
+                color_printf(COLOR_RED, "You tried to enter too big number\n");
             }
         }
         else {
@@ -83,14 +83,15 @@ static status in_put_one_coeff(double *one_coeff, int num_coeff) {
             return IN_PUT_ERROR;
         }
     }
+    
     return SUCCESS;
 }
 
 status in_put_all_coeffs(double *all_coeffs) {
     assert(all_coeffs != NULL);
 
-    color_print(COLOR_BLUE, "Please enter the coefficients of the equation you want to solve\n");
-    color_print(COLOR_RED, "Enter each coefficient from a new line\n");
+    color_printf(COLOR_BLUE, "Please enter the coefficients of the equation you want to solve\n");
+    color_printf(COLOR_RED, "Enter each coefficient from a new line\n");
 
     for (int i = 0; i < COUNT_COEFF; ++i) {
         status res = in_put_one_coeff(&all_coeffs[i], i);
@@ -98,6 +99,7 @@ status in_put_all_coeffs(double *all_coeffs) {
             return res;
         }
     }
+
     return SUCCESS;
 }
 
@@ -108,12 +110,12 @@ static char sign(double coefficient) {
 int check(double *all_coeffs) {
     assert(all_coeffs != NULL);
 
-    color_print(COLOR_CYAN, "Your equation looks like this:\n");
+    color_printf(COLOR_CYAN, "Your equation looks like this:\n");
     color_printf(COLOR_CYAN, "%lgx^2 %c %lgx %c %lg = 0\n", all_coeffs[0], sign(all_coeffs[1]), abs(all_coeffs[1]), sign(all_coeffs[2]), abs(all_coeffs[2]));
-    color_print(COLOR_CYAN, "Is everything right?\n");
+    color_printf(COLOR_CYAN, "Is everything right?\n");
 
     while (true) {
-        color_print(COLOR_RED, "Enter <<Yes>> or <<No>>\n");
+        color_printf(COLOR_RED, "Enter <<Yes>> or <<No>>\n");
 
         char ans[MAX_LEN + 1] = {};
         static_assert(MAX_LEN == 3);
@@ -135,29 +137,29 @@ int check(double *all_coeffs) {
 void out_put(solve_equation res_of_solving) {
     switch (res_of_solving.count_roots) {
         case ZERO:
-            color_print(COLOR_GREEN, "Your equation has no solutions :(\n");
+            color_printf(COLOR_GREEN, "Your equation has no solutions :(\n");
             break;
         case ONE:
             assert(!my_isnan(res_of_solving.roots[0]));
 
-            color_print(COLOR_GREEN, "I've got it!\nThe root of your equation is:\n");
+            color_printf(COLOR_GREEN, "I've got it!\nThe root of your equation is:\n");
             color_printf(COLOR_GREEN, "x = %lg\n", res_of_solving.roots[0]);
             break;
         case TWO:
             assert(!my_isnan(res_of_solving.roots[0]));
             assert(!my_isnan(res_of_solving.roots[1]));
             
-            color_print(COLOR_GREEN, "I've got it!\nThe roots of your equation are:\n");
+            color_printf(COLOR_GREEN, "I've got it!\nThe roots of your equation are:\n");
             color_printf(COLOR_GREEN, "x1 = %lg, x2 = %lg\n", res_of_solving.roots[0], res_of_solving.roots[1]);
             break;
         case INF:
-            color_print(COLOR_GREEN, "I've got it!\nYour equation has infinitely many solutions :)\n");
+            color_printf(COLOR_GREEN, "I've got it!\nYour equation has infinitely many solutions :)\n");
             break;
         default:
             assert(0 && "Unknown number of roots");
             break;
     }
-    color_print(COLOR_PURPLE, "I'm waiting for you with new equations! Meow <3\n");
+    color_printf(COLOR_PURPLE, "I'm waiting for you with new equations! Meow <3\n");
 
-    color_print(COLOR_RED, "P.S. for me: COMMIT ON GITHUB\n");
+    color_printf(COLOR_RED, "P.S. for me: COMMIT ON GITHUB\n");
 }

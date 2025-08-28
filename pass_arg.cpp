@@ -48,9 +48,11 @@ status args_cat_from_file(int * const argi, const char **argv, int argc, status_
             elems_is_found->filename_cat[num_cat] = argv[++(*argi)];
         }
         *argi += LAST_CAT_ELEMENT;
+
         return SUCCESS;
     }
-    color_print(COLOR_RED, "Missing flag with name of file\n");
+    color_printf(COLOR_RED, "Missing flag with name of file\n");
+
     return MISSING_FLAG_ARGUMENT;
 } 
 
@@ -81,5 +83,6 @@ status pass_args(int argc, const char **argv, status_of_finding *elems_is_found)
             return INVALID_FLAG;
         }
     }
+    
     return SUCCESS;
 }
