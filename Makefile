@@ -21,7 +21,7 @@ CPPOBJ := $(CPPSRC:%.cpp=build/%.o)
 
 HEADER_DEPENDS := $(CPPOBJ:%.o=%.d)
 
-PHONY: all #run
+.PHONY: all #run
 all: prog
 
 # run: all
