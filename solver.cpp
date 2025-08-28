@@ -101,8 +101,9 @@ void solve_sq(double *all_coeffs, solve_equation *res_of_solving) {
         res_of_solving -> roots[0] = x;
     }
     else if (discr > 0) {
-        double x1 = (-b - sqrt(discr)) / (2 * a);
-        double x2 = (-b + sqrt(discr)) / (2 * a);
+        double sqrt_d = sqrt(discr);
+        double x1 = (-b - sqrt_d) / (2 * a);
+        double x2 = (-b + sqrt_d) / (2 * a);
         res_of_solving -> count_roots = TWO;
         res_of_solving -> roots[0] = x1;
         res_of_solving -> roots[1] = x2;
