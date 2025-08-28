@@ -41,7 +41,7 @@ bool my_isnan(double x) {
 
     long x_long = 0;
     memcpy(&x_long, &x, sizeof(x));
-    long reference = 0x7FF << 52;
+    long reference = 0x7FFL << 52;
     x_long = x_long & reference;
     if (x_long == reference) {
         return true;
@@ -60,8 +60,8 @@ bool my_isinf(double x) {
 
     long x_long = 0;
     memcpy(&x_long, &x, sizeof(x));
-    long reference = 0x7FF << 63;
-    x_long = x_long & reference;
+    long reference = 0x7FFL << 52;
+    x_long = x_long & ~(0x1L << 63);
     if (x_long == reference) {
         return true;
     }
@@ -82,6 +82,10 @@ void solve_sq(double *all_coeffs, solve_equation *res_of_solving) {
     double a = all_coeffs[0];
     double b = all_coeffs[1];
     double c = all_coeffs[2];
+
+    assert(!my_isnan(a));
+    assert(!my_isnan(b));
+    assert(!my_isnan(c));
 
     if (is_double_equal(a, 0)) {
         solve_lin(all_coeffs + 1, res_of_solving);
