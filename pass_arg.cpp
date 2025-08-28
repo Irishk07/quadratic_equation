@@ -15,11 +15,12 @@ const existing_flags FLAGS_NAME [] = {
     {"--cats_from_file", &args_cat_from_file, "Replaces the standard output of cats with the output of cat from your file"}
 };
 
-status args_help(int * const, const char **, int, status_of_finding *) {
+status args_help(int * const, const char **, int, status_of_finding *elem_is_found) {
     size_t size = sizeof(FLAGS_NAME) / sizeof(FLAGS_NAME[0]);
     for (size_t fg = 0; fg < size; ++fg) {
         color_printf(COLOR_GREEN, "%s: %s\n", FLAGS_NAME[fg].flag, FLAGS_NAME[fg].description);
     }
+    elem_is_found->find_help = true;
 
     return SUCCESS;
 }
