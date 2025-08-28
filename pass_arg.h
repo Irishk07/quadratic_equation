@@ -12,7 +12,7 @@ enum cat_kinds {
 };
 
 struct status_of_finding {
-    const char *filename_cat [LAST_CAT_ELEMENT];
+    char *this_is_cat [LAST_CAT_ELEMENT];
     const char *filename_test = NULL;
     bool find_help = false;
 };

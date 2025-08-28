@@ -7,7 +7,9 @@
 
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 const existing_flags FLAGS_NAME [] = {
     {"--help",           &args_help,           "Gives you information about existing flags and their descriptions"          },
@@ -45,8 +47,26 @@ status args_cat_from_file(int * const argi, const char **argv, int argc, status_
 
     if (*argi + 2 < argc) {
         for (int num_cat = 0; num_cat < LAST_CAT_ELEMENT; ++num_cat) {
-            elems_is_found->filename_cat[num_cat] = argv[++(*argi)];
+            FILE *now_cat = fopen(argv[++(*argi)], "r");
+
+            if (now_cat == NULL) {
+                perror("Unable to open file");
+                return FILE_ERROR;
+            }
+
+            free((void *)elems_is_found->this_is_cat[num_cat]);
+
+            struct stat about_now_cat;
+            stat(argv[*argi], &about_now_cat);
+
+            char *point_on_cat = (char*)calloc((size_t)about_now_cat.st_size + 1, sizeof(char));
+            fread(point_on_cat, sizeof(char), (size_t)about_now_cat.st_size, now_cat);
+
+            elems_is_found->this_is_cat[num_cat] = point_on_cat;
+
+            fclose(now_cat);
         }
+
         *argi += LAST_CAT_ELEMENT;
 
         return SUCCESS;
@@ -83,6 +103,6 @@ status pass_args(int argc, const char **argv, status_of_finding *elems_is_found)
             return INVALID_FLAG;
         }
     }
-    
+
     return SUCCESS;
 }

@@ -22,7 +22,9 @@ static void welcome(status_of_finding elems_is_found);
 
 int main(int argc, const char **argv) {
     
-    status_of_finding elems_is_found = {};
+    status_of_finding elems_is_found = {
+        .this_is_cat = {strdup(sitting_cat), strdup(jumping_cat)}
+    };
     
     if (pass_args(argc, argv, &elems_is_found) != SUCCESS) {
         return -1;
@@ -69,6 +71,10 @@ int main(int argc, const char **argv) {
     solve_sq(all_coeffs, &res_of_solving);
 
     out_put(res_of_solving);
+
+    for (int i = 0; i < LAST_CAT_ELEMENT; ++i) {
+        free((void *)elems_is_found.this_is_cat[i]);
+    }
 
     return 0; 
 }

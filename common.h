@@ -26,7 +26,8 @@ enum status {
     KEEP_CHECK            = 3,
     TEST_FAILED           = 4,
     INVALID_FLAG          = 5,
-    MISSING_FLAG_ARGUMENT = 6
+    MISSING_FLAG_ARGUMENT = 6, 
+    FILE_ERROR            = 7
 };
 
 //......................................................................

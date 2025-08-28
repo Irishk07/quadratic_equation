@@ -14,8 +14,6 @@ const char jumping_cat [] = \
                             "    `-.-' \\ )-`( , o o)\n"
                             "          `-    \\`_`\"'-\n";
 
-const char * const cats [] = {sitting_cat, jumping_cat};
-
 //......................................................................
 //! Draws a cat
 //!
