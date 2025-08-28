@@ -46,6 +46,7 @@ bool my_isnan(double x) {
     if (x_long == reference) {
         return true;
     }
+
     return false;
 }
 
@@ -65,6 +66,7 @@ bool my_isinf(double x) {
     if (x_long == reference) {
         return true;
     }
+
     return false;
 }
 
@@ -72,6 +74,7 @@ static double fix_minus_zero(double root) {
     if (is_double_equal(abs(root), 0)) {
         return 0;
     }
+    
     return root;
 }
 

@@ -10,9 +10,9 @@ const int COUNT_COEFF = 3;
 //......................................................................
 enum cnt_of_roots {
     ZERO = 0, 
-    ONE = 1, 
-    TWO = 2, 
-    INF = 3
+    ONE  = 1, 
+    TWO  = 2, 
+    INF  = 3
 };
 
 //......................................................................
@@ -20,12 +20,12 @@ enum cnt_of_roots {
 //! @brief function operation status
 //......................................................................
 enum status {
-    SUCCESS = 0,
-    IN_PUT_ERROR = 1,
-    CHECK_ERROR = 2,
-    KEEP_CHECK = 3,
-    TEST_FAILED = 4,
-    INVALID_FLAG = 5,
+    SUCCESS               = 0,
+    IN_PUT_ERROR          = 1,
+    CHECK_ERROR           = 2,
+    KEEP_CHECK            = 3,
+    TEST_FAILED           = 4,
+    INVALID_FLAG          = 5,
     MISSING_FLAG_ARGUMENT = 6
 };
 
