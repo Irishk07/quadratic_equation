@@ -35,8 +35,12 @@ int main(int argc, const char **argv) {
     if (elems_is_found.filename_test != NULL) {
         int sum_error = 0;
 
-        if ((sum_error = run_all_test(elems_is_found.filename_test)) != 0) {
+        if ((sum_error = run_all_test(elems_is_found.filename_test)) > 0) {
             color_printf(COLOR_RED, "%d tests are failed\n", sum_error / TEST_FAILED);
+            return -1;
+        }
+        else if (sum_error == -1) {
+            color_print(COLOR_RED, "Invalid file with tests name");
             return -1;
         }
         color_print(COLOR_GREEN, "ALL TESTS RIGHT\n");

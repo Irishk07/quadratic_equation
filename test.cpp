@@ -38,7 +38,9 @@ status run_one_test(double a, double b, double c, int cnt_roots_test, double roo
 
 int run_all_test(const char *filename) {
     FILE *tests = fopen(filename, "r");
-    assert (tests != NULL);
+    if (tests == NULL) {
+        return -1;
+    }
 
     char head [MAX_HEAD_LEN] = {0};
     fgets(head, MAX_HEAD_LEN, tests);
