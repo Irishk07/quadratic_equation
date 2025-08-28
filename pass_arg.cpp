@@ -10,9 +10,9 @@
 #include <string.h>
 
 const existing_flags FLAGS_NAME [] = {
-    {"--help", &args_help, "Gives you information about existing flags and their descriptions"},
-    {"--test_file_name", &args_test_file_name, "Starts testing the program"},
-    {"--cats_from_file", &args_cat_from_file, "Replaces the standard output of cats with the output of cat from your file"}
+    {"--help",           &args_help,           "Gives you information about existing flags and their descriptions"          },
+    {"--test_file_name", &args_test_file_name, "Starts testing the program"                                                 },
+    {"--cats_from_file", &args_cat_from_file,  "Replaces the standard output of cats with the output of cat from your file" }
 };
 
 status args_help(int * const, const char **, int, status_of_finding *elem_is_found) {
