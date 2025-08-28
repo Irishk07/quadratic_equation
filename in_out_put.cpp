@@ -2,6 +2,7 @@
 
 #include "colors.h"
 #include "common.h"
+#include "solver.h"
 
 #include <assert.h>
 #include <ctype.h>
@@ -59,18 +60,24 @@ static void remove_trash() {
     }
 }
 
-static status in_put_one_coeff(double *all_coeffs, int num_coeff) {
-    assert(all_coeffs != NULL);
+static status in_put_one_coeff(double *one_coeff, int num_coeff) {
+    assert(one_coeff != NULL);
 
     int try_left = CNT_TRY;
     while (try_left > 0) {
         color_printf(COLOR_BLUE, "Enter the coefficient %c:\n", 'a' + num_coeff);
 
-        if (scanf("%lf", all_coeffs) == 1 && (getchar() == '\n')) {
-            break;
+        if (scanf("%lf", one_coeff) == 1 && (getchar() == '\n')) {
+            if (!(my_isnan(*one_coeff)) && !(my_isinf(*one_coeff))) {
+                break; 
+            }
+            else if (my_isinf(*one_coeff)) {
+                color_print(COLOR_RED, "You tried to enter too big number\n");
+            }
         }
-        
-        remove_trash();
+        else {
+            remove_trash();
+        }
 
         if (--try_left == 0) {
             return IN_PUT_ERROR;
@@ -131,10 +138,15 @@ void out_put(solve_equation res_of_solving) {
             color_print(COLOR_GREEN, "Your equation has no solutions :(\n");
             break;
         case ONE:
+            assert(!my_isnan(res_of_solving.roots[0]));
+
             color_print(COLOR_GREEN, "I've got it!\nThe root of your equation is:\n");
             color_printf(COLOR_GREEN, "x = %lg\n", res_of_solving.roots[0]);
             break;
         case TWO:
+            assert(!my_isnan(res_of_solving.roots[0]));
+            assert(!my_isnan(res_of_solving.roots[1]));
+            
             color_print(COLOR_GREEN, "I've got it!\nThe roots of your equation are:\n");
             color_printf(COLOR_GREEN, "x1 = %lg, x2 = %lg\n", res_of_solving.roots[0], res_of_solving.roots[1]);
             break;
