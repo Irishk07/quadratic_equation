@@ -20,10 +20,15 @@
 static void welcome(status_of_finding elems_is_found);
 
 int main(int argc, const char **argv) {
+    
     status_of_finding elems_is_found = {};
     
     if (pass_args(argc, argv, &elems_is_found) != SUCCESS) {
         return -1;
+    }
+    
+    if (elems_is_found.find_help == true) {
+        return 0;
     }
 
     if (elems_is_found.filename_test != NULL) {
@@ -34,6 +39,8 @@ int main(int argc, const char **argv) {
             return -1;
         }
         color_print(COLOR_GREEN, "ALL TESTS RIGHT\n");
+
+        return 0;
     }
 
     double all_coeffs [] = {0.f, 0.f, 0.f};
