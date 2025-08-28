@@ -8,6 +8,7 @@
 #include "test.h"
 
 #include <assert.h>
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -43,8 +44,8 @@ int main(int argc, const char **argv) {
         return 0;
     }
 
-    double all_coeffs [] = {0.f, 0.f, 0.f};
-    solve_equation res_of_solving = {0, {0.f, 0.f}};
+    double all_coeffs [] = {NAN, NAN, NAN};
+    solve_equation res_of_solving = {0, {NAN, NAN}};
 
     welcome(elems_is_found);
 
