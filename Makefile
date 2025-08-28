@@ -34,16 +34,16 @@ all: prog
 # 	./prog.exe test.txt
 
 $(CPPOBJ): build/%.o: %.cpp
-	$(CXX) $(CPPFLAGS) -MP -MMD -c $< -o $@
+	@$(CXX) $(CPPFLAGS) -MP -MMD -c $< -o $@
 
 prog: $(CPPOBJ) 
-	$(CXX) $^ -o $@ $(CPPFLAGS)
+	@$(CXX) $^ -o $@ $(CPPFLAGS)
 
 -include $(HEADER_DEPENDS)
  
 .PHONY: doxygen
 doxygen:
-	doxygen docs/Doxyfile
+	@doxygen docs/Doxyfile
 
 .PHONY: clean
 clean:
