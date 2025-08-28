@@ -10,7 +10,6 @@
 #define COLOR_RESET "\x1b[0m"
 
 #define color_text(color, text) color text COLOR_RESET
-#define color_printf(color, format, ...) printf(color_text(color, format), __VA_ARGS__)
-#define color_print(color, format) printf(color_text(color, format))
+#define color_printf(color, format, ...) printf(color_text(color, format), ##__VA_ARGS__)
 
 #endif // COLORS_H_
