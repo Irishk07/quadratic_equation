@@ -22,21 +22,13 @@ static void welcome(status_of_finding elems_is_found);
 
 int main(int argc, const char **argv) {
     
-    status_of_finding elems_is_found = {
-        .this_is_cat = {strdup(sitting_cat), strdup(jumping_cat)}
-    };
+    status_of_finding elems_is_found = {};
+    cats_ctor(&elems_is_found);
     
-    if (pass_args(argc, argv, &elems_is_found) != SUCCESS) {
-        for (int i = 0; i < LAST_CAT_ELEMENT; ++i) { //FIXME
-            free((void *)elems_is_found.this_is_cat[i]);
-        }
-        return -1;
-    }
+    RETURN_IF_ERROR(pass_args(argc, argv, &elems_is_found),             cats_dtor(&elems_is_found));
     
     if (elems_is_found.find_help == true) {
-        for (int i = 0; i < LAST_CAT_ELEMENT; ++i) { //FIXME
-            free((void *)elems_is_found.this_is_cat[i]);
-        }
+        cats_dtor(&elems_is_found);
         return 0;
     }
 
@@ -46,27 +38,18 @@ int main(int argc, const char **argv) {
         if ((sum_error = run_all_test(elems_is_found.filename_test)) > 0) {
             color_printf(COLOR_RED, "%d tests are failed\n", sum_error / TEST_FAILED);
 
-            for (int i = 0; i < LAST_CAT_ELEMENT; ++i) { //FIXME
-                free((void *)elems_is_found.this_is_cat[i]);
-            }
-
+            cats_dtor(&elems_is_found);
             return -1;
         }
         else if (sum_error == -1) {
             color_printf(COLOR_RED, "Invalid file with tests name\n");
 
-            for (int i = 0; i < LAST_CAT_ELEMENT; ++i) { //FIXME
-                free((void *)elems_is_found.this_is_cat[i]);
-            }
-
+            cats_dtor(&elems_is_found);
             return -1;
         }
         color_printf(COLOR_GREEN, "ALL TESTS RIGHT\n");
 
-        for (int i = 0; i < LAST_CAT_ELEMENT; ++i) { //FIXME
-            free((void *)elems_is_found.this_is_cat[i]);
-        }
-
+        cats_dtor(&elems_is_found);
         return 0;
     }
 
@@ -92,9 +75,7 @@ int main(int argc, const char **argv) {
 
     out_put(res_of_solving);
 
-    for (int i = 0; i < LAST_CAT_ELEMENT; ++i) {
-        free((void *)elems_is_found.this_is_cat[i]);
-    }
+    cats_dtor(&elems_is_found);
 
     return 0; 
 }

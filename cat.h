@@ -14,6 +14,8 @@ const char jumping_cat [] = \
                             "    `-.-' \\ )-`( , o o)\n"
                             "          `-    \\`_`\"'-\n";
 
+status cats_ctor(status_of_finding *elems_is_found);
+
 //......................................................................
 //! Draws a cat
 //!
@@ -22,5 +24,7 @@ const char jumping_cat [] = \
 //! @param[in] num_cat
 //......................................................................
 void print_cats(status_of_finding elem_is_found, cat_kinds num_cat);
+
+void cats_dtor(status_of_finding *elems_is_found);
 
 #endif //CAT_H

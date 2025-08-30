@@ -27,8 +27,15 @@ enum status {
     TEST_FAILED           = 4,
     INVALID_FLAG          = 5,
     MISSING_FLAG_ARGUMENT = 6, 
-    FILE_ERROR            = 7
+    FILE_ERROR            = 7,
+    NOT_ENOUGH_MEMORY     = 8
 };
+
+#define RETURN_IF_ERROR(err, ...)   \
+            if (err != SUCCESS) {   \
+                __VA_ARGS__;        \
+                return err;         \
+            }               
 
 //......................................................................
 //! @struct solve_equation
