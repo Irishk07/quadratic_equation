@@ -63,6 +63,9 @@ int main(int argc, const char **argv) {
         if (in_put_all_coeffs(all_coeffs) != SUCCESS || --try_left == 0) {
             color_printf(COLOR_RED, "You tried to do it %d times!\n", CNT_TRY);
             color_printf(COLOR_RED, "What's wrong with you....? :/\n");
+
+            cats_dtor(&elems_is_found);
+            
             return -1;
         }
     }
